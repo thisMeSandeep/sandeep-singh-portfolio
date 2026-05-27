@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProjectCard from "../../components/ui/ProjectCard.astro";
+import { projects } from "../../data/projects.ts";
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <section class="border-b border-[var(--border)]">
+      <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
+        <span
+          class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+        >
+          Featured Work
+        </span>
+
+        <h1
+          class="mt-3 font-serif text-3xl leading-tight tracking-tight text-[var(--text-1)]"
+        >
+          All projects
+        </h1>
+
+        <p class="mt-3 max-w-xl text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+          A collection of things I've designed and built — from full SaaS
+          platforms to focused tools and APIs.
+        </p>
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {
+            projects.map((project) => (
+              <div class="h-[26rem]">
+                <ProjectCard
+                  title={project.title}
+                  tagline={project.tagline}
+                  category={project.category}
+                  cover={project.cover}
+                  tech={project.tech}
+                  liveUrl={project.liveUrl}
+                  githubUrl={project.githubUrl}
+                  slug={project.slug}
+                  bentoSize={project.bentoSize as "large" | "medium" | "small"}
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,219 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import TechIcon from "../../components/ui/TechIcon.astro";
+import { projects } from "../../data/projects.ts";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+// Map a display tech name to its icon filename (without .svg).
+// Most names match the asset filename 1:1; these don't.
+const iconOverrides: Record<string, string> = {
+  PostgreSQL: "PostgresSQL",
+  "React Native": "React",
+};
+const iconFor = (tech: string) => iconOverrides[tech] ?? tech;
+
+// Previous / next project for bottom navigation (wraps around).
+const index = projects.findIndex((p) => p.slug === project.slug);
+const prev = projects[(index - 1 + projects.length) % projects.length];
+const next = projects[(index + 1) % projects.length];
+---
+
+<Layout
+  title={`${project.title} — Sandeep Singh`}
+  description={project.tagline}
+>
+  <Navbar />
+  <main>
+    <article class="border-b border-[var(--border)]">
+      <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
+        <a
+          href="/projects"
+          class="link-arrow group inline-flex items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
+        >
+          <span
+            class="transition-transform duration-200 group-hover:-translate-x-1"
+            aria-hidden="true">&larr;</span
+          >
+          All projects
+        </a>
+
+        <header class="mt-8">
+          <span
+            class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+          >
+            {project.category}
+          </span>
+
+          <h1
+            class="mt-3 font-serif text-3xl md:text-4xl leading-tight tracking-tight text-[var(--text-1)]"
+          >
+            {project.title}
+          </h1>
+
+          <p
+            class="mt-4 max-w-2xl text-base text-[var(--text-2)] leading-[var(--leading-relaxed)]"
+          >
+            {project.tagline}
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            {
+              project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 rounded-[var(--border-radius-sm)] bg-[var(--accent)] px-4 py-2 text-sm text-[var(--bg)]! transition-colors duration-200 hover:bg-[var(--accent-hover)]"
+                >
+                  Visit live site
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              )
+            }
+            {
+              project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 rounded-[var(--border-radius-sm)] border border-[var(--border-strong)] px-4 py-2 text-sm text-[var(--text-1)]! transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]!"
+                >
+                  View source
+                </a>
+              )
+            }
+          </div>
+        </header>
+
+        <img
+          src={project.cover}
+          alt={project.title}
+          class="mt-10 aspect-[16/9] w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] object-cover"
+        />
+
+        <section class="mt-12">
+          <h2
+            class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+          >
+            Project story
+          </h2>
+
+          <div class="mt-5 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+            <div
+              class="space-y-6 text-base leading-[var(--leading-relaxed)] text-[var(--text-2)]"
+            >
+              {project.summary && <p>{project.summary}</p>}
+
+              {
+                project.challenge && (
+                  <div>
+                    <h3 class="text-sm font-medium uppercase tracking-[var(--tracking-wider)] text-[var(--text-1)]">
+                      Challenge
+                    </h3>
+                    <p class="mt-2">{project.challenge}</p>
+                  </div>
+                )
+              }
+
+              {
+                project.approach && (
+                  <div>
+                    <h3 class="text-sm font-medium uppercase tracking-[var(--tracking-wider)] text-[var(--text-1)]">
+                      Approach
+                    </h3>
+                    <p class="mt-2">{project.approach}</p>
+                  </div>
+                )
+              }
+
+              {
+                project.outcome && (
+                  <div>
+                    <h3 class="text-sm font-medium uppercase tracking-[var(--tracking-wider)] text-[var(--text-1)]">
+                      Outcome
+                    </h3>
+                    <p class="mt-2">{project.outcome}</p>
+                  </div>
+                )
+              }
+            </div>
+
+            {
+              project.learnings && project.learnings.length > 0 && (
+                <aside class="self-start rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] p-5 lg:sticky lg:top-24">
+                  <h3 class="text-sm font-medium uppercase tracking-[var(--tracking-wider)] text-[var(--text-1)]">
+                    Key learnings
+                  </h3>
+                  <ul class="mt-4 space-y-3 text-sm leading-[var(--leading-relaxed)] text-[var(--text-2)]">
+                    {project.learnings.map((learning) => (
+                      <li class="flex gap-3">
+                        <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
+                        <span>{learning}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </aside>
+              )
+            }
+          </div>
+
+          <h2
+            class="mt-12 text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+          >
+            Built with
+          </h2>
+          <div class="mt-5 flex flex-wrap gap-x-8 gap-y-6">
+            {
+              project.tech.map((tech) => (
+                <TechIcon name={tech} icon={iconFor(tech)} />
+              ))
+            }
+          </div>
+        </section>
+
+        <nav
+          class="mt-16 grid grid-cols-1 gap-4 border-t border-[var(--border-subtle)] pt-8 sm:grid-cols-2"
+          aria-label="More projects"
+        >
+          <a
+            href={`/projects/${prev.slug}`}
+            class="group flex flex-col gap-1.5 rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] p-5 transition-colors duration-200 hover:border-[var(--border-strong)]"
+          >
+            <span class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]">
+              &larr; Previous
+            </span>
+            <span
+              class="font-serif text-lg leading-snug text-[var(--text-1)]! transition-colors duration-200 group-hover:text-[var(--accent)]!"
+            >
+              {prev.title}
+            </span>
+          </a>
+          <a
+            href={`/projects/${next.slug}`}
+            class="group flex flex-col gap-1.5 rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] p-5 text-right transition-colors duration-200 hover:border-[var(--border-strong)] sm:items-end"
+          >
+            <span class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]">
+              Next &rarr;
+            </span>
+            <span
+              class="font-serif text-lg leading-snug text-[var(--text-1)]! transition-colors duration-200 group-hover:text-[var(--accent)]!"
+            >
+              {next.title}
+            </span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>
