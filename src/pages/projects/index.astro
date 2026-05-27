@@ -1,15 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
-import Footer from "../../components/Footer.astro";
 import ProjectCard from "../../components/ui/ProjectCard.astro";
 import { projects } from "../../data/projects.ts";
 ---
 
 <Layout>
-  <Navbar />
-  <main>
-    <section class="border-b border-[var(--border)]">
+  <section class="border-b border-[var(--border)]">
       <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
         <span
           class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
@@ -48,7 +44,5 @@ import { projects } from "../../data/projects.ts";
           }
         </div>
       </div>
-    </section>
-  </main>
-  <Footer />
+  </section>
 </Layout>
