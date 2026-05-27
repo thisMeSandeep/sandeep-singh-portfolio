@@ -8,9 +8,33 @@ import Projects from '../components/sections/Projects.astro';
 import Freelance from '../components/sections/Freelance.astro';
 import Blog from '../components/sections/Blog.astro';
 import Contact from '../components/sections/Contact.astro';
+import { linkedin, twitter, github, location } from '../data/info.ts';
+
+const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+
+// Person schema helps search engines understand who the site is about and
+// can power knowledge-panel / rich results for name searches.
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Sandeep Singh',
+	url: site,
+	jobTitle: 'Full-Stack Developer',
+	image: `${site}/og.png`,
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: location,
+	},
+	sameAs: [linkedin, twitter, github],
+};
 ---
 
 <Layout>
+	<script
+		slot="head"
+		type="application/ld+json"
+		set:html={JSON.stringify(personSchema)}
+	/>
 	<Hero />
 	<About />
 	<Skills />
