@@ -1,0 +1,72 @@
+---
+const info = [
+  { label: "Based in", value: "Bengaluru, India" },
+  { label: "Focus", value: "React, Node.js & React Native" },
+  { label: "Available for", value: "Full-time & freelance work" },
+];
+---
+
+<section
+  class="border-b border-[var(--border)]"
+>
+  <div
+    class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-20 md:py-28 grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-12 md:gap-16 items-start"
+  >
+    <!-- Left column -->
+    <div class="flex flex-col gap-6">
+      <span
+        class="inline-flex w-fit items-center rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] text-sm px-3 py-1"
+      >
+        Available for work
+      </span>
+
+      <h1
+        class="font-serif text-5xl md:text-6xl leading-[1.1] tracking-tight text-[var(--text-1)]"
+      >
+        Full stack developer building clean, fast products.
+      </h1>
+
+      <p class="text-lg text-[var(--text-2)] max-w-[var(--max-w-content)]">
+        I'm Sandeep Singh — a full stack and mobile developer.
+      </p>
+
+      <p
+        class="text-base text-[var(--text-2)] max-w-[var(--max-w-content)] leading-[var(--leading-normal)]"
+      >
+        I design and ship end-to-end web and mobile applications, from the
+        database to the pixel. I care about fast load times, clean interfaces,
+        and code that's easy to live with.
+      </p>
+
+      <a
+        href="#work"
+        class="link-arrow group inline-flex w-fit items-center gap-1.5 text-[var(--accent)] hover:text-[var(--accent-hover)] text-base mt-2"
+      >
+        View my work
+        <span
+          class="transition-transform duration-200 group-hover:translate-x-1"
+          aria-hidden="true">&rarr;</span
+        >
+      </a>
+    </div>
+
+    <!-- Right column — info panel -->
+    <div class="flex flex-col">
+      {
+        info.map((row, i) => (
+          <div
+            class:list={[
+              "flex flex-col gap-1 py-4",
+              { "border-t border-[var(--border)]": i !== 0 },
+            ]}
+          >
+            <span class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]">
+              {row.label}
+            </span>
+            <span class="text-base text-[var(--text-1)]">{row.value}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
