@@ -1,0 +1,128 @@
+---
+import GitHub from "./icons/GitHub.astro";
+import LinkedIn from "./icons/LinkedIn.astro";
+import Twitter from "./icons/Twitter.astro";
+
+const socials = [
+  { name: "GitHub", href: "https://github.com/thisMeSandeep", Icon: GitHub },
+  { name: "LinkedIn", href: "https://linkedin.com/in/thismesandeep", Icon: LinkedIn },
+  { name: "X", href: "https://x.com/thismesandeep", Icon: Twitter },
+];
+
+const navigation = [
+  { label: "Work", href: "#work" },
+  { label: "Blog", href: "#blog" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+const resources = [
+  { label: "GitHub", href: "https://github.com/thisMeSandeep" },
+  { label: "Articles", href: "/blog" },
+  { label: "DropForm", href: "https://dropform.io" },
+  { label: "Resume", href: "/resume.pdf" },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--border)]">
+  <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+      <!-- Column 1: identity -->
+      <div class="col-span-2 md:col-span-1 flex flex-col gap-4">
+        <span class="font-serif text-base text-[var(--text-1)]">
+          Sandeep Singh
+        </span>
+        <p class="text-sm text-[var(--text-3)] max-w-[28ch]">
+          Full stack & mobile developer building clean, fast products.
+        </p>
+        <div class="flex items-center gap-4 mt-1">
+          {
+            socials.map(({ name, href, Icon }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                class="footer-social text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+              >
+                <Icon />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Column 2: navigation -->
+      <div class="flex flex-col">
+        <span
+          class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)] mb-4"
+        >
+          Navigation
+        </span>
+        <nav class="flex flex-col gap-2">
+          {
+            navigation.map((link) => (
+              <a
+                href={link.href}
+                class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <!-- Column 3: resources -->
+      <div class="flex flex-col">
+        <span
+          class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)] mb-4"
+        >
+          Resources
+        </span>
+        <nav class="flex flex-col gap-2">
+          {
+            resources.map((link) => (
+              <a
+                href={link.href}
+                class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <!-- Column 4: contact -->
+      <div class="flex flex-col">
+        <span
+          class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)] mb-4"
+        >
+          Contact
+        </span>
+        <a
+          href="mailto:ssandeep@aganitha.ai"
+          class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+        >
+          ssandeep@aganitha.ai
+        </a>
+        <span class="text-sm text-[var(--text-3)] mt-2">Bengaluru, India</span>
+      </div>
+    </div>
+
+    <p class="text-xs text-[var(--text-muted)] mt-12">
+      &copy; {year} Sandeep Singh. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  /* Heroicons ship at 24px (size-6); footer social icons should be 18px */
+  .footer-social :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+</style>
