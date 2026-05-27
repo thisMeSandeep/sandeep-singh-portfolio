@@ -1,1 +1,287 @@
+/* ============================================================
+   PORTFOLIO DESIGN TOKENS — Tailwind v4 (CSS-first)
+   Extracted from light + dark mockups
+   ============================================================ */
+
 @import "tailwindcss";
+
+@theme {
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+     System serif for headings, system sans for body.
+     Matches the editorial, journal-like feel in the mockups.
+  ---------------------------------------------------------- */
+
+  --font-sans:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif:   "Playfair Display", ui-serif, Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Fira Code", monospace;
+
+  /* Type scale — generous, never cramped */
+  --text-xs:      0.75rem;    /* 12px — captions, labels only */
+  --text-sm:      0.875rem;   /* 14px — meta, dates, tags */
+  --text-base:    1rem;       /* 16px — body copy */
+  --text-lg:      1.125rem;   /* 18px — lead paragraphs */
+  --text-xl:      1.25rem;    /* 20px — card titles */
+  --text-2xl:     1.5rem;     /* 24px — section headings */
+  --text-3xl:     1.875rem;   /* 30px — page titles */
+  --text-4xl:     2.25rem;    /* 36px — hero sub-headline */
+  --text-5xl:     3rem;       /* 48px — hero headline */
+  --text-6xl:     3.75rem;    /* 60px — hero headline large */
+
+  /* Font weights — two weights do almost everything */
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;  /* sparingly */
+
+  /* Line heights */
+  --leading-tight:   1.2;   /* display headings */
+  --leading-snug:    1.35;  /* subheadings */
+  --leading-normal:  1.6;   /* body copy */
+  --leading-relaxed: 1.75;  /* blog body, long reads */
+
+  /* Letter spacing */
+  --tracking-tighter: -0.03em;  /* large hero headings */
+  --tracking-tight:   -0.015em; /* section headings */
+  --tracking-normal:   0em;
+  --tracking-wide:     0.06em;  /* section labels, caps */
+  --tracking-wider:    0.1em;   /* eyebrow labels */
+
+  /* ----------------------------------------------------------
+     SPACING SCALE
+     Generous — the mockup breathes. Sections have real air.
+  ---------------------------------------------------------- */
+
+  --spacing-px:   1px;
+  --spacing-0-5:  0.125rem;  /*  2px */
+  --spacing-1:    0.25rem;   /*  4px */
+  --spacing-2:    0.5rem;    /*  8px */
+  --spacing-3:    0.75rem;   /* 12px */
+  --spacing-4:    1rem;      /* 16px */
+  --spacing-5:    1.25rem;   /* 20px */
+  --spacing-6:    1.5rem;    /* 24px */
+  --spacing-8:    2rem;      /* 32px */
+  --spacing-10:   2.5rem;    /* 40px */
+  --spacing-12:   3rem;      /* 48px */
+  --spacing-16:   4rem;      /* 64px */
+  --spacing-20:   5rem;      /* 80px */
+  --spacing-24:   6rem;      /* 96px */
+  --spacing-32:   8rem;      /* 128px */
+  --spacing-40:   10rem;     /* 160px */
+  --spacing-48:   12rem;     /* 192px */
+
+  /* Section vertical rhythm — the key to that airy feel */
+  --section-gap:        6rem;   /* 96px between major sections */
+  --section-gap-lg:     8rem;   /* 128px for hero breathing room */
+  --content-gap:        2.5rem; /* 40px between content blocks */
+
+  /* ----------------------------------------------------------
+     LAYOUT
+  ---------------------------------------------------------- */
+
+  --max-w-content:  680px;   /* body copy, blog posts */
+  --max-w-layout:   900px;   /* general page layout */
+  --max-w-wide:     1100px;  /* full-width sections */
+
+  --border-radius-sm:   0.25rem;  /*  4px — tags, pills */
+  --border-radius-md:   0.5rem;   /*  8px — cards, inputs */
+  --border-radius-lg:   0.75rem;  /* 12px — project cards */
+  --border-radius-xl:   1rem;     /* 16px — large cards */
+
+  /* ----------------------------------------------------------
+     COLOR — LIGHT MODE
+     Extracted from light mockup:
+     Background: near-white warm #FAFAF8
+     Text: near-black warm #1A1A18
+     Accent: muted warm stone, not pure grey
+  ---------------------------------------------------------- */
+
+  /* Backgrounds */
+  --color-bg:             #FAFAF8;   /* page background — warm white */
+  --color-bg-secondary:   #F4F3F0;   /* subtle section tint */
+  --color-bg-tertiary:    #EDECE8;   /* card backgrounds, code blocks */
+  --color-bg-hover:       #F0EFEb;   /* hover states on cards */
+
+  /* Text hierarchy — warm neutrals, never pure black */
+  --color-text-primary:   #1A1A18;   /* headings, key content */
+  --color-text-secondary: #4A4A46;   /* body copy */
+  --color-text-tertiary:  #7A7A75;   /* meta, dates, captions */
+  --color-text-muted:     #A8A8A2;   /* placeholder, disabled */
+
+  /* Borders — hairlines only, never thick */
+  --color-border:         #E2E1DC;   /* default hairline divider */
+  --color-border-subtle:  #ECEBE7;   /* the subtlest separation */
+  --color-border-strong:  #C8C7C1;   /* hover state border */
+
+  /* Accent — one muted warm tone, used sparingly */
+  --color-accent:         #4A6741;   /* muted sage green — links, CTAs */
+  --color-accent-hover:   #3A5432;   /* darker on hover */
+  --color-accent-subtle:  #EBF0EA;   /* very light tint for tags */
+
+  /* Functional */
+  --color-tag-bg:         #EDECE8;
+  --color-tag-text:       #4A4A46;
+  --color-nav-text:       #4A4A46;
+  --color-nav-active:     #1A1A18;
+
+  /* ----------------------------------------------------------
+     COLOR — DARK MODE
+     Extracted from dark mockup:
+     Background: deep warm charcoal #141412
+     Text: soft warm off-white #E8E7E3
+     Same muted green accent, lightened for dark bg
+  ---------------------------------------------------------- */
+
+  --color-bg-dark:             #141412;
+  --color-bg-secondary-dark:   #1C1C1A;
+  --color-bg-tertiary-dark:    #242422;
+  --color-bg-hover-dark:       #202020;
+
+  --color-text-primary-dark:   #E8E7E3;
+  --color-text-secondary-dark: #A8A8A2;
+  --color-text-tertiary-dark:  #6A6A65;
+  --color-text-muted-dark:     #4A4A46;
+
+  --color-border-dark:         #2E2E2C;
+  --color-border-subtle-dark:  #262624;
+  --color-border-strong-dark:  #3E3E3C;
+
+  --color-accent-dark:         #8AAF85;   /* lighter sage for dark bg */
+  --color-accent-hover-dark:   #A0C49B;
+  --color-accent-subtle-dark:  #1E2B1D;
+
+  --color-tag-bg-dark:         #242422;
+  --color-tag-text-dark:       #A8A8A2;
+
+  /* ----------------------------------------------------------
+     TRANSITIONS
+     CSS only — no animation libraries.
+     Light, intentional, not decorative.
+  ---------------------------------------------------------- */
+
+  --transition-fast:    150ms ease;
+  --transition-base:    200ms ease;
+  --transition-slow:    300ms ease;
+
+  /* ----------------------------------------------------------
+     SHADOWS
+     Whisper only — no heavy shadows.
+     Used for cards on hover, almost invisible.
+  ---------------------------------------------------------- */
+
+  --shadow-xs:   0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm:   0 1px 4px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.05);  /* card hover only */
+
+}
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES (runtime, not Tailwind theme)
+   These switch on dark mode. Use these in your components.
+   ============================================================ */
+
+:root {
+  --bg:               var(--color-bg);
+  --bg-2:             var(--color-bg-secondary);
+  --bg-3:             var(--color-bg-tertiary);
+  --bg-hover:         var(--color-bg-hover);
+
+  --text-1:           var(--color-text-primary);
+  --text-2:           var(--color-text-secondary);
+  --text-3:           var(--color-text-tertiary);
+  --text-muted:       var(--color-text-muted);
+
+  --border:           var(--color-border);
+  --border-subtle:    var(--color-border-subtle);
+  --border-strong:    var(--color-border-strong);
+
+  --accent:           var(--color-accent);
+  --accent-hover:     var(--color-accent-hover);
+  --accent-subtle:    var(--color-accent-subtle);
+
+  --tag-bg:           var(--color-tag-bg);
+  --tag-text:         var(--color-tag-text);
+
+  --shadow:           var(--shadow-card);
+
+  --transition:       var(--transition-base);
+}
+
+.dark {
+  --bg:               var(--color-bg-dark);
+  --bg-2:             var(--color-bg-secondary-dark);
+  --bg-3:             var(--color-bg-tertiary-dark);
+  --bg-hover:         var(--color-bg-hover-dark);
+
+  --text-1:           var(--color-text-primary-dark);
+  --text-2:           var(--color-text-secondary-dark);
+  --text-3:           var(--color-text-tertiary-dark);
+  --text-muted:       var(--color-text-muted-dark);
+
+  --border:           var(--color-border-dark);
+  --border-subtle:    var(--color-border-subtle-dark);
+  --border-strong:    var(--color-border-strong-dark);
+
+  --accent:           var(--color-accent-dark);
+  --accent-hover:     var(--color-accent-hover-dark);
+  --accent-subtle:    var(--color-accent-subtle-dark);
+
+  --tag-bg:           var(--color-tag-bg-dark);
+  --tag-text:         var(--color-tag-text-dark);
+
+  --shadow:           0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+html {
+  background-color: var(--bg);
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+/* Headings use serif font for that editorial quality */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  color: var(--text-1);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-sans);
+  color: var(--text-1);
+  font-weight: var(--font-weight-medium);
+}
+
+p {
+  color: var(--text-2);
+  line-height: var(--leading-normal);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* Hairline dividers */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+}
+
+
+
+

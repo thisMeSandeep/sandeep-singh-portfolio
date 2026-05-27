@@ -12,6 +12,11 @@ import "../styles/global.css";
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Sandeep Singh</title>
+		<script is:inline>
+			if (localStorage.getItem("theme") === "dark") {
+				document.documentElement.classList.add("dark");
+			}
+		</script>
 	</head>
 	<body>
 		<slot />
