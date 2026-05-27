@@ -2,25 +2,29 @@
 import GitHub from "./icons/GitHub.astro";
 import LinkedIn from "./icons/LinkedIn.astro";
 import Twitter from "./icons/Twitter.astro";
+import { github, linkedin, twitter, email, location } from "../data/info.ts";
+
+const resumeUrl = "/my-resume.pdf";
+const emailDisplay = email.replace(/^mailto:/, "");
 
 const socials = [
-  { name: "GitHub", href: "https://github.com/thisMeSandeep", Icon: GitHub },
-  { name: "LinkedIn", href: "https://linkedin.com/in/thismesandeep", Icon: LinkedIn },
-  { name: "X", href: "https://x.com/thismesandeep", Icon: Twitter },
+  { name: "GitHub", href: github, Icon: GitHub },
+  { name: "LinkedIn", href: linkedin, Icon: LinkedIn },
+  { name: "X", href: twitter, Icon: Twitter },
 ];
 
 const navigation = [
-  { label: "Work", href: "#work" },
-  { label: "Blog", href: "#blog" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "/#work" },
+  { label: "Blog", href: "/#blog" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const resources = [
-  { label: "GitHub", href: "https://github.com/thisMeSandeep" },
+  { label: "GitHub", href: github },
   { label: "Articles", href: "/blogs" },
   { label: "DropForm", href: "https://dropform.io" },
-  { label: "Resume", href: "/resume.pdf" },
+  { label: "Resume", href: resumeUrl },
 ];
 
 const year = new Date().getFullYear();
@@ -84,14 +88,21 @@ const year = new Date().getFullYear();
         </span>
         <nav class="flex flex-col gap-2">
           {
-            resources.map((link) => (
-              <a
-                href={link.href}
-                class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
-              >
-                {link.label}
-              </a>
-            ))
+            resources.map((link) => {
+              const external =
+                link.href.startsWith("http") || link.href.endsWith(".pdf");
+              return (
+                <a
+                  href={link.href}
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+                >
+                  {link.label}
+                </a>
+              );
+            })
           }
         </nav>
       </div>
@@ -104,12 +115,12 @@ const year = new Date().getFullYear();
           Contact
         </span>
         <a
-          href="mailto:ssandeep@aganitha.ai"
+          href={email}
           class="text-sm text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
         >
-          ssandeep@aganitha.ai
+          {emailDisplay}
         </a>
-        <span class="text-sm text-[var(--text-3)] mt-2">Bengaluru, India</span>
+        <span class="text-sm text-[var(--text-3)] mt-2">{location}</span>
       </div>
     </div>
 

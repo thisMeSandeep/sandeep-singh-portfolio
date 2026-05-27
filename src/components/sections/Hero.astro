@@ -1,8 +1,22 @@
 ---
+import GitHub from "../icons/GitHub.astro";
+import LinkedIn from "../icons/LinkedIn.astro";
+import Twitter from "../icons/Twitter.astro";
+import ArrowDown from "../icons/ArrowDown.astro";
+import { github, linkedin, twitter, location } from "../../data/info.ts";
+
+const resumeUrl = "/my-resume.pdf";
+
 const info = [
-  { label: "Based in", value: "Bengaluru, India" },
+  { label: "Based in", value: location },
   { label: "Focus", value: "React, Node.js & React Native" },
   { label: "Available for", value: "Full-time & freelance work" },
+];
+
+const socials = [
+  { name: "GitHub", href: github, Icon: GitHub },
+  { name: "LinkedIn", href: linkedin, Icon: LinkedIn },
+  { name: "X", href: twitter, Icon: Twitter },
 ];
 ---
 
@@ -67,6 +81,54 @@ const info = [
           </div>
         ))
       }
+
+      <!-- Resume CTA + social links -->
+      <div class="flex flex-col gap-5 border-t border-[var(--border)] pt-6 mt-1">
+        <a
+          href={resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="resume-cta group inline-flex w-full items-center justify-center gap-2 rounded-[var(--border-radius-md)] bg-[var(--accent)] px-5 py-3 text-base font-medium text-[var(--bg)]! shadow-[var(--shadow)] transition-colors duration-200 hover:bg-[var(--accent-hover)]"
+        >
+          <span
+            class="transition-transform duration-200 group-hover:translate-y-0.5"
+            aria-hidden="true"><ArrowDown /></span
+          >
+          View resume
+        </a>
+
+        <div class="flex items-center gap-2">
+          <span class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)] mr-1">
+            Find me
+          </span>
+          {
+            socials.map(({ name, href, Icon }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+                class="hero-social text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+              >
+                <Icon />
+              </a>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Heroicons ship at 24px (size-6); hero social icons should be 20px */
+  .hero-social :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+  /* Resume icon sized to match the button text */
+  .resume-cta :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+</style>

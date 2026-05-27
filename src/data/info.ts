@@ -7,3 +7,5 @@ export const github = "https://github.com/sandeepsinghnayal";
 export const email = "mailto:sandeepnayal50@gmail.com";
 
 export const phone = "tel:+919999999999";
+
+export const location = "Hyderabad, India";
