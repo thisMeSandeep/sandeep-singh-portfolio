@@ -3,6 +3,16 @@ import { projects } from "../../data/projects.ts";
 import ProjectCard from "../ui/ProjectCard.astro";
 
 const featured = projects.filter((p) => p.featured);
+
+// Bento placement for the large / medium / medium / large layout.
+// Desktop is a 3-col × 2-row grid: tall cards on the sides (row-span-2),
+// two short cards stacked in the middle column.
+const placement = [
+  "sm:col-span-2 lg:col-span-1 lg:row-span-2 lg:col-start-1 lg:row-start-1",
+  "lg:col-start-2 lg:row-start-1",
+  "lg:col-start-2 lg:row-start-2",
+  "sm:col-span-2 lg:col-span-1 lg:row-span-2 lg:col-start-3 lg:row-start-1",
+];
 ---
 
 <section id="work" class="border-b border-[var(--border)]">
@@ -31,20 +41,24 @@ const featured = projects.filter((p) => p.featured);
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+    <div
+      class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-4 lg:h-[34rem]"
+    >
       {
-        featured.map((project) => (
-          <ProjectCard
-            title={project.title}
-            tagline={project.tagline}
-            category={project.category}
-            cover={project.cover}
-            tech={project.tech}
-            liveUrl={project.liveUrl}
-            githubUrl={project.githubUrl}
-            slug={project.slug}
-            bentoSize={project.bentoSize as "large" | "medium" | "small"}
-          />
+        featured.map((project, i) => (
+          <div class={placement[i] ?? ""}>
+            <ProjectCard
+              title={project.title}
+              tagline={project.tagline}
+              category={project.category}
+              cover={project.cover}
+              tech={project.tech}
+              liveUrl={project.liveUrl}
+              githubUrl={project.githubUrl}
+              slug={project.slug}
+              bentoSize={project.bentoSize as "large" | "medium" | "small"}
+            />
+          </div>
         ))
       }
     </div>

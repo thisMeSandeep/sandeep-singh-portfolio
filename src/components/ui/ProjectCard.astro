@@ -11,30 +11,27 @@ interface Props {
   bentoSize: "large" | "medium" | "small";
 }
 
-const { title, tagline, category, cover, tech, slug, bentoSize } = Astro.props;
-
-const isLarge = bentoSize === "large";
+const { title, tagline, category, cover, tech, slug } = Astro.props;
 ---
 
 <article
-  class:list={[
-    "project-card group flex flex-col overflow-hidden rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow)]",
-    isLarge ? "md:col-span-2" : "col-span-1",
-  ]}
+  class="project-card group flex h-full flex-col overflow-hidden rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow)]"
 >
-  <a href={`/projects/${slug}`} class="block">
+  <!-- Image fills the remaining height of the cell -->
+  <a
+    href={`/projects/${slug}`}
+    class="relative block min-h-44 w-full grow overflow-hidden lg:min-h-0"
+  >
     <img
       src={cover}
       alt={title}
       loading="lazy"
-      class:list={[
-        "w-full object-cover border-b border-[var(--border-subtle)] rounded-t-[var(--border-radius-lg)]",
-        isLarge ? "aspect-[16/9]" : "aspect-[4/3]",
-      ]}
+      class="absolute inset-0 h-full w-full border-b border-[var(--border-subtle)] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
     />
   </a>
 
-  <div class="flex flex-col gap-3 p-5">
+  <!-- Body: fixed, compact -->
+  <div class="flex shrink-0 flex-col gap-2 p-5">
     <span
       class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
     >
@@ -49,29 +46,18 @@ const isLarge = bentoSize === "large";
       </h3>
     </a>
 
-    <p class="text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+    <p class="line-clamp-2 text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
       {tagline}
     </p>
 
-    <div class="flex flex-wrap gap-2">
+    <div class="mt-1 flex flex-wrap gap-2">
       {
-        tech.map((t) => (
+        tech.slice(0, 4).map((t) => (
           <span class="rounded-[var(--border-radius-sm)] bg-[var(--tag-bg)] px-2 py-0.5 text-xs text-[var(--tag-text)]">
             {t}
           </span>
         ))
       }
     </div>
-
-    <a
-      href={`/projects/${slug}`}
-      class="link-arrow group/link mt-1 inline-flex w-fit items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
-    >
-      View case study
-      <span
-        class="transition-transform duration-200 group-hover/link:translate-x-1"
-        aria-hidden="true">&rarr;</span
-      >
-    </a>
   </div>
 </article>
