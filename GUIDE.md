@@ -334,7 +334,7 @@ Two work entries. Each entry:
 - Heading: "Contributions" — `var(--text-sm)`, `var(--text-3)`
 - Fetch contribution data from GitHub API at build time using Astro's `fetch()`
   in the component frontmatter
-- URL: `https://github-contributions-api.jogruber.de/v4/thisMeSandeep?y=last`
+- 
   (This is a free, no-auth public API that returns contribution data)
 - Render as an SVG grid of small squares — 53 columns (weeks) × 7 rows (days)
 - Square size: `10px`, gap: `2px`
@@ -391,7 +391,7 @@ Suggested layout for 4 projects:
 [ small card — spans full width        ]
 ```
 Adjust based on your actual `bentoSize` values in the data.
-
+URL: `https://github-contributions-api.jogruber.de/v4/thisMeSandeep?y=last`
 **`ProjectCard.astro` props:**
 ```astro
 ---

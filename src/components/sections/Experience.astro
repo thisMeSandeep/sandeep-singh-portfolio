@@ -1,0 +1,172 @@
+---
+const GITHUB_USERNAME = "thisMeSandeep";
+
+const experience = [
+  {
+    company: "Aganitha",
+    role: "Full Stack Developer",
+    dates: "2023 — Present",
+    points: [
+      "Built and shipped internal web applications end to end with React, TypeScript and Node.js.",
+      "Designed REST APIs and PostgreSQL schemas powering data-heavy dashboards.",
+      "Owned the frontend architecture and component system across multiple products.",
+    ],
+  },
+  {
+    company: "Freelance",
+    role: "Web & Mobile Developer",
+    dates: "2021 — 2023",
+    points: [
+      "Delivered full-stack web and React Native apps for small teams and founders.",
+      "Took projects from spec to production, including deployment and maintenance.",
+    ],
+  },
+];
+
+// --- GitHub contributions (build-time fetch) ---
+type Day = { date: string; count: number; level: number };
+let contributions: Day[] = [];
+let totalLastYear = 0;
+
+try {
+  const res = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+  );
+  if (res.ok) {
+    const data = await res.json();
+    contributions = data.contributions ?? [];
+    totalLastYear = data.total?.lastYear ?? 0;
+  }
+} catch {
+  contributions = [];
+}
+
+// Bucket days into week columns (rows = weekday, 0 = Sunday)
+const weeks: (Day | null)[][] = [];
+if (contributions.length) {
+  let current: (Day | null)[] = new Array(7).fill(null);
+  const firstWeekday = new Date(contributions[0].date).getUTCDay();
+  for (let i = 0; i < firstWeekday; i++) current[i] = null;
+
+  for (const day of contributions) {
+    const weekday = new Date(day.date).getUTCDay();
+    current[weekday] = day;
+    if (weekday === 6) {
+      weeks.push(current);
+      current = new Array(7).fill(null);
+    }
+  }
+  if (current.some((d) => d !== null)) weeks.push(current);
+}
+
+const CELL = 10;
+const GAP = 2;
+const STEP = CELL + GAP;
+const width = weeks.length * STEP - GAP;
+const height = 7 * STEP - GAP;
+
+// Map a contribution count to a fill + opacity (guide thresholds)
+function fillFor(count: number) {
+  if (count === 0) return { fill: "var(--bg-3)", opacity: 1 };
+  if (count <= 3) return { fill: "var(--accent)", opacity: 0.3 };
+  if (count <= 6) return { fill: "var(--accent)", opacity: 0.5 };
+  if (count <= 9) return { fill: "var(--accent)", opacity: 0.7 };
+  return { fill: "var(--accent)", opacity: 1 };
+}
+---
+
+<section id="experience" class="border-b border-[var(--border)]">
+  <div
+    class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start"
+  >
+    <!-- Left: timeline -->
+    <div class="flex flex-col">
+      <span
+        class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+      >
+        Experience
+      </span>
+      <h2
+        class="font-serif text-2xl leading-tight tracking-tight text-[var(--text-1)] mt-3"
+      >
+        Where I've worked
+      </h2>
+
+      <div class="flex flex-col gap-10 mt-8">
+        {
+          experience.map((job) => (
+            <div class="border-l border-[var(--border)] pl-5">
+              <h3 class="text-xl font-medium text-[var(--text-1)]">
+                {job.company}
+              </h3>
+              <div class="flex items-baseline justify-between gap-4 mt-1 text-sm text-[var(--text-3)]">
+                <span>{job.role}</span>
+                <span class="shrink-0">{job.dates}</span>
+              </div>
+              <ul class="flex flex-col gap-2 mt-3">
+                {job.points.map((point) => (
+                  <li class="text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Right: GitHub contribution graph -->
+    <div class="flex flex-col gap-4">
+      <div class="flex items-baseline justify-between gap-4">
+        <span class="text-sm text-[var(--text-3)]">Contributions</span>
+        {
+          totalLastYear > 0 && (
+            <span class="text-sm text-[var(--text-3)]">
+              {totalLastYear} in the last year
+            </span>
+          )
+        }
+      </div>
+
+      {
+        weeks.length ? (
+          <div class="overflow-x-auto">
+            <svg
+              width={width}
+              height={height}
+              viewBox={`0 0 ${width} ${height}`}
+              role="img"
+              aria-label={`GitHub contributions for ${GITHUB_USERNAME}`}
+              class="block"
+            >
+              {weeks.map((week, x) =>
+                week.map((day, y) => {
+                  if (!day) return null;
+                  const { fill, opacity } = fillFor(day.count);
+                  return (
+                    <rect
+                      x={x * STEP}
+                      y={y * STEP}
+                      width={CELL}
+                      height={CELL}
+                      rx="2"
+                      fill={fill}
+                      fill-opacity={opacity}
+                    >
+                      <title>{`${day.count} on ${day.date}`}</title>
+                    </rect>
+                  );
+                })
+              )}
+            </svg>
+          </div>
+        ) : (
+          <p class="text-sm text-[var(--text-muted)]">
+            Contribution data is unavailable right now.
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>

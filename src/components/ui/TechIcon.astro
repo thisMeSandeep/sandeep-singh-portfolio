@@ -1,0 +1,41 @@
+---
+interface Props {
+  name: string; // display name, e.g. "React"
+  icon: string; // filename without .svg, e.g. "React" or "Tailwind CSS"
+}
+
+const { name, icon } = Astro.props;
+
+// Resolve every tech icon to its built URL, keyed by bare filename.
+const modules = import.meta.glob<string>("../../assets/tech-icons/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const icons: Record<string, string> = {};
+for (const [path, url] of Object.entries(modules)) {
+  const file = path.split("/").pop()!.replace(/\.svg$/, "");
+  icons[file] = url;
+}
+
+const src = icons[icon];
+---
+
+{
+  src && (
+    <div class="tech-icon group flex flex-col items-center gap-1.5">
+      <img
+        src={src}
+        alt={name}
+        width="32"
+        height="32"
+        loading="lazy"
+        class="h-8 w-8 opacity-70 transition-opacity duration-200 group-hover:opacity-100"
+      />
+      <span class="text-xs text-[var(--text-3)] transition-colors duration-200 group-hover:text-[var(--text-1)]">
+        {name}
+      </span>
+    </div>
+  )
+}
