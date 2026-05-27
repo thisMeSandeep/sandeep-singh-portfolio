@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+
 interface Props {
   title: string;
   tagline: string;
@@ -22,10 +24,11 @@ const { title, tagline, category, cover, tech, slug } = Astro.props;
     href={`/projects/${slug}`}
     class="relative block min-h-44 w-full grow overflow-hidden lg:min-h-0"
   >
-    <img
+    <Image
       src={cover}
       alt={title}
-      loading="lazy"
+      width={1200}
+      height={800}
       class="absolute inset-0 h-full w-full border-b border-[var(--border-subtle)] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
     />
   </a>

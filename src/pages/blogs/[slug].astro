@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -63,9 +64,11 @@ const formattedDate = post.data.publishedDate.toLocaleDateString("en-US", {
           }
         </header>
 
-        <img
+        <Image
           src={post.data.cover}
           alt={post.data.title}
+          width={1200}
+          height={675}
           class="mt-10 aspect-[16/9] w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] object-cover"
         />
 

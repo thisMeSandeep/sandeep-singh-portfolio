@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import TechIcon from "../../components/ui/TechIcon.astro";
+import { Image } from "astro:assets";
 import { projects } from "../../data/projects.ts";
 
 export function getStaticPaths() {
@@ -91,9 +92,11 @@ const next = projects[(index + 1) % projects.length];
           </div>
         </header>
 
-        <img
+        <Image
           src={project.cover}
           alt={project.title}
+          width={1200}
+          height={675}
           class="mt-10 aspect-[16/9] w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] object-cover"
         />
 
