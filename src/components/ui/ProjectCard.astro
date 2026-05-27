@@ -1,0 +1,77 @@
+---
+interface Props {
+  title: string;
+  tagline: string;
+  category: string;
+  cover: string;
+  tech: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  slug: string;
+  bentoSize: "large" | "medium" | "small";
+}
+
+const { title, tagline, category, cover, tech, slug, bentoSize } = Astro.props;
+
+const isLarge = bentoSize === "large";
+---
+
+<article
+  class:list={[
+    "project-card group flex flex-col overflow-hidden rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow)]",
+    isLarge ? "md:col-span-2" : "col-span-1",
+  ]}
+>
+  <a href={`/projects/${slug}`} class="block">
+    <img
+      src={cover}
+      alt={title}
+      loading="lazy"
+      class:list={[
+        "w-full object-cover border-b border-[var(--border-subtle)] rounded-t-[var(--border-radius-lg)]",
+        isLarge ? "aspect-[16/9]" : "aspect-[4/3]",
+      ]}
+    />
+  </a>
+
+  <div class="flex flex-col gap-3 p-5">
+    <span
+      class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+    >
+      {category}
+    </span>
+
+    <a href={`/projects/${slug}`}>
+      <h3
+        class="font-serif text-xl font-medium leading-snug text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]"
+      >
+        {title}
+      </h3>
+    </a>
+
+    <p class="text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+      {tagline}
+    </p>
+
+    <div class="flex flex-wrap gap-2">
+      {
+        tech.map((t) => (
+          <span class="rounded-[var(--border-radius-sm)] bg-[var(--tag-bg)] px-2 py-0.5 text-xs text-[var(--tag-text)]">
+            {t}
+          </span>
+        ))
+      }
+    </div>
+
+    <a
+      href={`/projects/${slug}`}
+      class="link-arrow group/link mt-1 inline-flex w-fit items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
+    >
+      View case study
+      <span
+        class="transition-transform duration-200 group-hover/link:translate-x-1"
+        aria-hidden="true">&rarr;</span
+      >
+    </a>
+  </div>
+</article>

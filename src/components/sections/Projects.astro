@@ -1,0 +1,52 @@
+---
+import { projects } from "../../data/projects.ts";
+import ProjectCard from "../ui/ProjectCard.astro";
+
+const featured = projects.filter((p) => p.featured);
+---
+
+<section id="work" class="border-b border-[var(--border)]">
+  <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
+    <span
+      class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+    >
+      Featured Work
+    </span>
+
+    <div class="flex items-baseline justify-between gap-4 mt-3">
+      <h2
+        class="font-serif text-2xl leading-tight tracking-tight text-[var(--text-1)]"
+      >
+        Selected projects
+      </h2>
+      <a
+        href="/projects"
+        class="link-arrow group inline-flex shrink-0 items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
+      >
+        See all projects
+        <span
+          class="transition-transform duration-200 group-hover:translate-x-1"
+          aria-hidden="true">&rarr;</span
+        >
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+      {
+        featured.map((project) => (
+          <ProjectCard
+            title={project.title}
+            tagline={project.tagline}
+            category={project.category}
+            cover={project.cover}
+            tech={project.tech}
+            liveUrl={project.liveUrl}
+            githubUrl={project.githubUrl}
+            slug={project.slug}
+            bentoSize={project.bentoSize as "large" | "medium" | "small"}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
