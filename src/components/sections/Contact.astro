@@ -1,0 +1,89 @@
+---
+import Phone from "../icons/Phone.astro";
+import Mail from "../icons/Mail.astro";
+import Message from "../icons/Message.astro";
+
+const rows = [
+  {
+    Icon: Phone,
+    label: "Phone",
+    value: "+91 98765 43210",
+    href: "tel:+919876543210",
+  },
+  {
+    Icon: Mail,
+    label: "Email",
+    value: "ssandeep@aganitha.ai",
+    href: "mailto:ssandeep@aganitha.ai",
+  },
+  {
+    Icon: Message,
+    label: "Project enquiry",
+    value: "Start a project",
+    href: "https://dropform.io",
+    arrow: true,
+    external: true,
+  },
+];
+---
+
+<section id="contact">
+  <div class="mx-auto max-w-[var(--max-w-layout)] px-6 md:px-8 py-24">
+    <span
+      class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+    >
+      Contact
+    </span>
+    <h2
+      class="font-serif text-3xl leading-tight tracking-tight text-[var(--text-1)] mt-3"
+    >
+      Let's work together.
+    </h2>
+    <p class="text-base text-[var(--text-2)] mt-3 max-w-[var(--max-w-content)]">
+      Have a project in mind, or just want to say hello? The fastest way to
+      reach me is below.
+    </p>
+
+    <ul class="flex flex-col mt-10">
+      {
+        rows.map(({ Icon, label, value, href, arrow, external }) => (
+          <li>
+            <a
+              href={href}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              class="group flex items-center gap-4 py-4 border-b border-[var(--border-subtle)] transition-colors duration-200"
+            >
+              <span class="contact-icon text-[var(--text-3)]">
+                <Icon />
+              </span>
+              <span class="text-sm text-[var(--text-3)] w-32 shrink-0">
+                {label}
+              </span>
+              <span class="inline-flex items-center gap-1.5 text-base text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+                {value}
+                {arrow && (
+                  <span
+                    class="transition-transform duration-200 group-hover:translate-x-1"
+                    aria-hidden="true"
+                  >
+                    &rarr;
+                  </span>
+                )}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  /* Heroicons ship at 24px (size-6); contact icons should be 20px */
+  .contact-icon :global(svg) {
+    width: 20px;
+    height: 20px;
+  }
+</style>
