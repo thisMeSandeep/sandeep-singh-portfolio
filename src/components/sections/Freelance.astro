@@ -1,0 +1,130 @@
+---
+import Globe from "../icons/Globe.astro";
+import Phone from "../icons/Phone.astro";
+import Layers from "../icons/Layers.astro";
+import Code from "../icons/Code.astro";
+import ExternalLink from "../icons/ExternalLink.astro";
+
+const services = [
+  { label: "Web Application Development", Icon: Globe },
+  { label: "Mobile App Development (React Native)", Icon: Phone },
+  { label: "REST API & Backend Systems", Icon: Layers },
+  { label: "Full-Stack Product Development", Icon: Code },
+];
+
+const process = [
+  "Discovery — we scope the problem, the users, and what success looks like.",
+  "Plan — I map the architecture, milestones, and a realistic timeline.",
+  "Build — I ship in tight iterations with regular previews you can try.",
+  "Launch & support — deployment, handover, and help once you're live.",
+];
+
+const platforms = [
+  { name: "Upwork", url: "https://upwork.com" },
+  { name: "Fiverr", url: "https://fiverr.com" },
+];
+---
+
+<section id="freelance" class="border-b border-[var(--border)]">
+  <div
+    class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start"
+  >
+    <!-- Left column -->
+    <div class="flex flex-col">
+      <span
+        class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+      >
+        Freelance
+      </span>
+      <h2
+        class="font-serif text-2xl leading-tight tracking-tight text-[var(--text-1)] mt-3"
+      >
+        Available for select projects
+      </h2>
+      <p
+        class="text-base text-[var(--text-2)] leading-[var(--leading-normal)] mt-4"
+      >
+        I work with founders and small teams to design and build products from
+        scratch — or to push an existing one further. A few things I help with:
+      </p>
+
+      <ul class="flex flex-col mt-6">
+        {
+          services.map(({ label, Icon }) => (
+            <li class="svc-row flex items-center gap-3 py-3 border-b border-[var(--border-subtle)]">
+              <span class="svc-icon text-[var(--text-3)]">
+                <Icon />
+              </span>
+              <span class="text-base text-[var(--text-1)]">{label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Right column -->
+    <div class="flex flex-col gap-10">
+      <div class="flex flex-col gap-4">
+        <h3 class="text-sm uppercase tracking-[var(--tracking-wide)] text-[var(--text-3)]">
+          My process
+        </h3>
+        <ol class="flex flex-col gap-3">
+          {
+            process.map((step, i) => (
+              <li class="flex gap-3 text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+                <span class="text-[var(--text-3)] tabular-nums">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>{step}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="text-sm uppercase tracking-[var(--tracking-wide)] text-[var(--text-3)]">
+          Find me on
+        </h3>
+        <ul class="flex flex-col">
+          {
+            platforms.map((p) => (
+              <li>
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group flex items-center justify-between gap-3 py-3 border-b border-[var(--border-subtle)] text-[var(--text-1)] transition-colors duration-200 hover:text-[var(--accent)]"
+                >
+                  <span class="flex items-center gap-3">
+                    <span class="svc-icon text-[var(--text-3)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+                      <ExternalLink />
+                    </span>
+                    <span class="text-base">{p.name}</span>
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 text-sm text-[var(--accent)]">
+                    View profile
+                    <span
+                      class="transition-transform duration-200 group-hover:translate-x-1"
+                      aria-hidden="true"
+                    >
+                      &rarr;
+                    </span>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Heroicons ship at 24px (size-6); shrink the inline ones to 16px */
+  .svc-icon :global(svg) {
+    width: 16px;
+    height: 16px;
+  }
+</style>
