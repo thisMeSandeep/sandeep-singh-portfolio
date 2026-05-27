@@ -2,7 +2,7 @@
 interface Props {
   title: string;
   excerpt: string;
-  publishedDate: string;
+  publishedDate: Date;
   slug: string;
 }
 
@@ -18,7 +18,7 @@ const formattedDate = new Date(publishedDate).toLocaleDateString("en-US", {
 <article class="group flex flex-col gap-3 border-t border-[var(--border-subtle)] pt-5">
   <span class="text-xs text-[var(--text-3)]">{formattedDate}</span>
 
-  <a href={`/blog/${slug}`}>
+  <a href={`/blogs/${slug}`}>
     <h3
       class="font-serif text-xl leading-snug text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]"
     >
@@ -31,7 +31,7 @@ const formattedDate = new Date(publishedDate).toLocaleDateString("en-US", {
   </p>
 
   <a
-    href={`/blog/${slug}`}
+    href={`/blogs/${slug}`}
     class="link-arrow group/link mt-1 inline-flex w-fit items-center gap-1.5 text-sm text-[var(--accent)] hover:text-[var(--accent-hover)]"
   >
     Read article

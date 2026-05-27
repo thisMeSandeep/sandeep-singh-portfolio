@@ -1,0 +1,51 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import BlogCard from "../../components/ui/BlogCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedDate.valueOf() - a.data.publishedDate.valueOf(),
+);
+---
+
+<Layout title="Writing — Sandeep Singh" description="Articles on frontend, mobile, and backend engineering.">
+  <Navbar />
+  <main>
+    <section class="border-b border-[var(--border)]">
+      <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
+        <span
+          class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
+        >
+          Latest Writing
+        </span>
+
+        <h1
+          class="mt-3 font-serif text-3xl leading-tight tracking-tight text-[var(--text-1)]"
+        >
+          From the blogs
+        </h1>
+
+        <p class="mt-3 max-w-xl text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+          Notes on building for the web and mobile — frontend patterns, offline
+          sync, API design, and the decisions in between.
+        </p>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            posts.map((post) => (
+              <BlogCard
+                title={post.data.title}
+                excerpt={post.data.excerpt}
+                publishedDate={post.data.publishedDate}
+                slug={post.id}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
