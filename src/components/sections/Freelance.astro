@@ -4,25 +4,19 @@ import Phone from "../icons/Phone.astro";
 import Layers from "../icons/Layers.astro";
 import Code from "../icons/Code.astro";
 import ExternalLink from "../icons/ExternalLink.astro";
+import { freelance, type FreelanceServiceKey } from "../../data/content.ts";
 
-const services = [
-  { label: "Web Application Development", Icon: Globe },
-  { label: "Mobile App Development (React Native)", Icon: Phone },
-  { label: "REST API & Backend Systems", Icon: Layers },
-  { label: "Full-Stack Product Development", Icon: Code },
-];
+const serviceIcons: Record<FreelanceServiceKey, typeof Globe> = {
+  web: Globe,
+  mobile: Phone,
+  backend: Layers,
+  fullstack: Code,
+};
 
-const process = [
-  "Discovery — we scope the problem, the users, and what success looks like.",
-  "Plan — I map the architecture, milestones, and a realistic timeline.",
-  "Build — I ship in tight iterations with regular previews you can try.",
-  "Launch & support — deployment, handover, and help once you're live.",
-];
-
-const platforms = [
-  { name: "Upwork", url: "https://upwork.com" },
-  { name: "Fiverr", url: "https://fiverr.com" },
-];
+const services = freelance.services.map((s) => ({
+  label: s.label,
+  Icon: serviceIcons[s.key],
+}));
 ---
 
 <section id="freelance" class="border-b border-[var(--border)]">
@@ -34,18 +28,17 @@ const platforms = [
       <span
         class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
       >
-        Freelance
+        {freelance.eyebrow}
       </span>
       <h2
         class="font-serif text-2xl leading-tight tracking-tight text-[var(--text-1)] mt-3"
       >
-        Available for select projects
+        {freelance.heading}
       </h2>
       <p
         class="text-base text-[var(--text-2)] leading-[var(--leading-normal)] mt-4"
       >
-        I work with founders and small teams to design and build products from
-        scratch — or to push an existing one further. A few things I help with:
+        {freelance.intro}
       </p>
 
       <ul class="flex flex-col mt-6">
@@ -66,11 +59,11 @@ const platforms = [
     <div class="flex flex-col gap-10">
       <div class="flex flex-col gap-4">
         <h3 class="text-sm uppercase tracking-[var(--tracking-wide)] text-[var(--text-3)]">
-          My process
+          {freelance.processHeading}
         </h3>
         <ol class="flex flex-col gap-3">
           {
-            process.map((step, i) => (
+            freelance.process.map((step, i) => (
               <li class="flex gap-3 text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
                 <span class="text-[var(--text-3)] tabular-nums">
                   {String(i + 1).padStart(2, "0")}
@@ -84,11 +77,11 @@ const platforms = [
 
       <div class="flex flex-col gap-4">
         <h3 class="text-sm uppercase tracking-[var(--tracking-wide)] text-[var(--text-3)]">
-          Find me on
+          {freelance.platformsHeading}
         </h3>
         <ul class="flex flex-col">
           {
-            platforms.map((p) => (
+            freelance.platforms.map((p) => (
               <li>
                 <a
                   href={p.url}
@@ -103,7 +96,7 @@ const platforms = [
                     <span class="text-base">{p.name}</span>
                   </span>
                   <span class="inline-flex items-center gap-1.5 text-sm text-[var(--accent)]">
-                    View profile
+                    {freelance.platformCtaLabel}
                     <span
                       class="transition-transform duration-200 group-hover:translate-x-1"
                       aria-hidden="true"

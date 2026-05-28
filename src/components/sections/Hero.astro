@@ -4,13 +4,12 @@ import LinkedIn from "../icons/LinkedIn.astro";
 import Twitter from "../icons/Twitter.astro";
 import ArrowDown from "../icons/ArrowDown.astro";
 import { github, linkedin, twitter, location } from "../../data/info.ts";
-
-const resumeUrl = "/my-resume.pdf";
+import { hero } from "../../data/content.ts";
 
 const info = [
-  { label: "Based in", value: location },
-  { label: "Focus", value: "React, Node.js & React Native" },
-  { label: "Available for", value: "Full-time & freelance work" },
+  { label: hero.info.basedInLabel, value: location },
+  { label: hero.info.focusLabel, value: hero.info.focusValue },
+  { label: hero.info.availableForLabel, value: hero.info.availableForValue },
 ];
 
 const socials = [
@@ -31,32 +30,30 @@ const socials = [
       <span
         class="inline-flex w-fit items-center rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] text-sm px-3 py-1"
       >
-        Available for work
+        {hero.availability}
       </span>
 
       <h1
         class="font-serif text-5xl md:text-6xl leading-[1.1] tracking-tight text-[var(--text-1)]"
       >
-        Full stack developer building clean, fast products.
+        {hero.heading}
       </h1>
 
       <p class="text-lg text-[var(--text-2)] max-w-[var(--max-w-content)]">
-        I'm Sandeep Singh — a full stack and mobile developer.
+        {hero.intro}
       </p>
 
       <p
         class="text-base text-[var(--text-2)] max-w-[var(--max-w-content)] leading-[var(--leading-normal)]"
       >
-        I design and ship end-to-end web and mobile applications, from the
-        database to the pixel. I care about fast load times, clean interfaces,
-        and code that's easy to live with.
+        {hero.description}
       </p>
 
       <a
-        href="#work"
+        href={hero.ctaHref}
         class="link-arrow group inline-flex w-fit items-center gap-1.5 text-[var(--accent)] hover:text-[var(--accent-hover)] text-base mt-2"
       >
-        View my work
+        {hero.ctaLabel}
         <span
           class="transition-transform duration-200 group-hover:translate-x-1"
           aria-hidden="true">&rarr;</span
@@ -85,7 +82,7 @@ const socials = [
       <!-- Resume CTA + social links -->
       <div class="flex flex-col gap-5 border-t border-[var(--border)] pt-6 mt-1">
         <a
-          href={resumeUrl}
+          href={hero.resumeUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="resume-cta group inline-flex w-full items-center justify-center gap-2 rounded-[var(--border-radius-md)] bg-[var(--accent)] px-5 py-3 text-base font-medium text-[var(--bg)]! shadow-[var(--shadow)] transition-colors duration-200 hover:bg-[var(--accent-hover)]"
@@ -94,12 +91,12 @@ const socials = [
             class="transition-transform duration-200 group-hover:translate-y-0.5"
             aria-hidden="true"><ArrowDown /></span
           >
-          View resume
+          {hero.resumeLabel}
         </a>
 
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-4">
           <span class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)] mr-1">
-            Find me
+            {hero.socialsLabel}
           </span>
           {
             socials.map(({ name, href, Icon }) => (
@@ -108,7 +105,7 @@ const socials = [
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={name}
-                class="hero-social text-[var(--text-3)] transition-colors duration-200 hover:text-[var(--text-1)]"
+                class="hero-social inline-flex text-[var(--text-3)] transition duration-200 hover:text-[var(--text-1)] hover:scale-125"
               >
                 <Icon />
               </a>

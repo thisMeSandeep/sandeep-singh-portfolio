@@ -1,4 +1,5 @@
 ---
+import { about } from "../../data/content.ts";
 ---
 
 <section id="about" class="border-b border-[var(--border)]">
@@ -10,33 +11,29 @@
       <span
         class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
       >
-        About
+        {about.eyebrow}
       </span>
       <h2
         class="font-serif text-3xl leading-tight tracking-tight text-[var(--text-1)]"
       >
-        I care about the details most people never see.
+        {about.heading}
       </h2>
     </div>
 
     <!-- Right column -->
     <div class="flex flex-col gap-5">
-      <p class="text-base text-[var(--text-2)] leading-[var(--leading-relaxed)]">
-        I've spent the last several years building products end to end — shaping
-        the data model, wiring up the API, and obsessing over the last few
-        pixels of the interface. I like working close to the whole stack because
-        that's where the interesting trade-offs live.
-      </p>
-      <p class="text-base text-[var(--text-2)] leading-[var(--leading-relaxed)]">
-        Outside of client work I build small tools, write about what I learn,
-        and keep a soft spot for fast, quiet software that respects the people
-        using it.
-      </p>
+      {
+        about.paragraphs.map((p) => (
+          <p class="text-base text-[var(--text-2)] leading-[var(--leading-relaxed)]">
+            {p}
+          </p>
+        ))
+      }
       <a
-        href="#contact"
+        href={about.ctaHref}
         class="link-arrow group inline-flex w-fit items-center gap-1.5 text-[var(--accent)] hover:text-[var(--accent-hover)] text-base mt-1"
       >
-        More about me
+        {about.ctaLabel}
         <span
           class="transition-transform duration-200 group-hover:translate-x-1"
           aria-hidden="true">&rarr;</span
