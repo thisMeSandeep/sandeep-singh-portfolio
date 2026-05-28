@@ -8,32 +8,46 @@ import Projects from '../components/sections/Projects.astro';
 import Freelance from '../components/sections/Freelance.astro';
 import Blog from '../components/sections/Blog.astro';
 import Contact from '../components/sections/Contact.astro';
-import { linkedin, twitter, github, location } from '../data/info.ts';
+import { linkedin, twitter, github, location, email } from '../data/info.ts';
 
 const site = Astro.site?.href.replace(/\/$/, '') ?? '';
+const sameAs = [linkedin, twitter, github];
 
-// Person schema helps search engines understand who the site is about and
-// can power knowledge-panel / rich results for name searches.
-const personSchema = {
+// Schema helps search engines connect the homepage, owner, and social profiles.
+const homeSchema = {
 	'@context': 'https://schema.org',
-	'@type': 'Person',
-	name: 'Sandeep Singh',
-	url: site,
-	jobTitle: 'Full-Stack Developer',
-	image: `${site}/og.png`,
-	address: {
-		'@type': 'PostalAddress',
-		addressLocality: location,
-	},
-	sameAs: [linkedin, twitter, github],
+	'@graph': [
+		{
+			'@type': 'WebSite',
+			'@id': `${site}/#website`,
+			name: 'Sandeep Singh',
+			url: site,
+			inLanguage: 'en-US',
+			publisher: { '@id': `${site}/#person` },
+		},
+		{
+			'@type': 'Person',
+			'@id': `${site}/#person`,
+			name: 'Sandeep Singh',
+			url: site,
+			email: email.replace('mailto:', ''),
+			jobTitle: 'Full-Stack Developer',
+			image: `${site}/og.png`,
+			address: {
+				'@type': 'PostalAddress',
+				addressLocality: location,
+			},
+			sameAs,
+		},
+	],
 };
 ---
 
-<Layout>
+<Layout keywords={["Sandeep Singh", "full-stack developer", "React developer", "Node.js developer", "Astro portfolio"]}>
 	<script
 		slot="head"
 		type="application/ld+json"
-		set:html={JSON.stringify(personSchema)}
+		set:html={JSON.stringify(homeSchema)}
 	/>
 	<Hero />
 	<About />

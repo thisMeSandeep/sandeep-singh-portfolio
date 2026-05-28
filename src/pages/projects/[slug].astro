@@ -12,6 +12,8 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const absoluteCover = new URL(project.cover, Astro.site).href;
 
 // Map a display tech name to its icon filename (without .svg).
 // Most names match the asset filename 1:1; these don't.
@@ -25,13 +27,38 @@ const iconFor = (tech: string) => iconOverrides[tech] ?? tech;
 const index = projects.findIndex((p) => p.slug === project.slug);
 const prev = projects[(index - 1 + projects.length) % projects.length];
 const next = projects[(index + 1) % projects.length];
+
+const projectSchema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: project.title,
+  description: project.tagline,
+  image: absoluteCover,
+  url: canonical,
+  creator: {
+    "@type": "Person",
+    name: "Sandeep Singh",
+    url: Astro.site?.href.replace(/\/$/, ""),
+  },
+  keywords: project.tech.join(", "),
+  genre: project.category,
+  sameAs: [project.liveUrl, project.githubUrl].filter(Boolean),
+};
 ---
 
 <Layout
   title={`${project.title} — Sandeep Singh`}
   description={project.tagline}
   image={project.cover}
+  imageWidth={1200}
+  imageHeight={675}
+  keywords={[project.title, project.category, ...project.tech]}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(projectSchema)}
+  />
   <article class="border-b border-[var(--border)]">
       <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
         <a

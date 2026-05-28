@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f8fafc"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="#ffffff" stroke="#d8dee9" stroke-width="2"/>
+  <text x="120" y="178" fill="#526070" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Sandeep Singh</text>
+  <text x="120" y="294" fill="#111827" font-family="Georgia, 'Times New Roman', serif" font-size="74" font-weight="700">Full-stack developer</text>
+  <text x="120" y="376" fill="#111827" font-family="Georgia, 'Times New Roman', serif" font-size="74" font-weight="700">building clean products.</text>
+  <text x="120" y="462" fill="#526070" font-family="Arial, Helvetica, sans-serif" font-size="30">React · TypeScript · Node.js · Next.js </text>
+  <text x="120" y="512" fill="#2563eb" font-family="Arial, Helvetica, sans-serif" font-size="28">sandeepnayal.com</text>
+</svg>

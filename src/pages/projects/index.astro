@@ -2,12 +2,38 @@
 import Layout from "../../layouts/Layout.astro";
 import ProjectCard from "../../components/ui/ProjectCard.astro";
 import { projects } from "../../data/projects.ts";
+
+const site = Astro.site?.href.replace(/\/$/, "") ?? "";
+const projectsSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Projects by Sandeep Singh",
+  description:
+    "Selected projects by Sandeep Singh across SaaS platforms, mobile apps, APIs, and dashboards.",
+  url: `${site}/projects/`,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${site}/projects/${project.slug}/`,
+      name: project.title,
+      description: project.tagline,
+    })),
+  },
+};
 ---
 
 <Layout
   title="Projects — Sandeep Singh"
   description="Selected projects by Sandeep Singh — SaaS platforms, mobile apps, and APIs built with React, TypeScript, Node.js, and more."
+  keywords={["Sandeep Singh projects", "full-stack projects", "React projects", "Node.js projects", "portfolio"]}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(projectsSchema)}
+  />
   <section class="border-b border-[var(--border)]">
       <div class="mx-auto max-w-[var(--max-w-wide)] px-6 md:px-8 py-24">
         <span

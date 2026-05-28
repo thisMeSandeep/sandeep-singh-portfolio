@@ -20,15 +20,26 @@ const formattedDate = post.data.publishedDate.toLocaleDateString("en-US", {
 });
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const absoluteCover = new URL(post.data.cover, Astro.site).href;
 
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   headline: post.data.title,
   description: post.data.excerpt,
-  image: post.data.cover,
+  image: absoluteCover,
   datePublished: post.data.publishedDate.toISOString(),
-  author: { "@type": "Person", name: "Sandeep Singh" },
+  dateModified: post.data.publishedDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: "Sandeep Singh",
+    url: Astro.site?.href.replace(/\/$/, ""),
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Sandeep Singh",
+    url: Astro.site?.href.replace(/\/$/, ""),
+  },
   keywords: post.data.tags.join(", "),
   articleSection: post.data.category,
   mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
@@ -39,8 +50,12 @@ const articleSchema = {
   title={`${post.data.title} — Sandeep Singh`}
   description={post.data.excerpt}
   image={post.data.cover}
+  imageWidth={1200}
+  imageHeight={675}
   type="article"
   publishedDate={post.data.publishedDate}
+  modifiedDate={post.data.publishedDate}
+  keywords={post.data.tags}
 >
   <script
     slot="head"
