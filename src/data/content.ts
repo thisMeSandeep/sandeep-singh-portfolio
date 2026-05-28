@@ -22,6 +22,35 @@ export const hero = {
   },
 };
 
+export const experience = {
+  eyebrow: "Experience",
+  heading: "Where I've worked",
+  githubUsername: "thisMeSandeep",
+  contributionsLabel: "Contributions",
+  contributionsUnavailable: "Contribution data is unavailable right now.",
+  jobs: [
+    {
+      company: "Aganitha",
+      role: "Full Stack Developer",
+      dates: "Feb , 2026 — Present",
+      points: [
+        "Built and shipped AI powered client applications.",
+        "Designed REST APIs and PostgreSQL schemas powering data-heavy dashboards.",
+        "Owned the frontend architecture and component system across multiple products.",
+      ],
+    },
+    {
+      company: "Freelance",
+      role: "Web & Mobile Developer",
+      dates: "2021 — 2023",
+      points: [
+        "Delivered full-stack web and React Native apps for small teams and founders.",
+        "Took projects from spec to production, including deployment and maintenance.",
+      ],
+    },
+  ],
+};
+
 export const about = {
   eyebrow: "About",
   heading: "I care about the code that matters and the user experience.",

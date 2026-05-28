@@ -1,27 +1,7 @@
 ---
-const GITHUB_USERNAME = "thisMeSandeep";
+import { experience } from "../../data/content.ts";
 
-const experience = [
-  {
-    company: "Aganitha",
-    role: "Full Stack Developer",
-    dates: "2023 — Present",
-    points: [
-      "Built and shipped internal web applications end to end with React, TypeScript and Node.js.",
-      "Designed REST APIs and PostgreSQL schemas powering data-heavy dashboards.",
-      "Owned the frontend architecture and component system across multiple products.",
-    ],
-  },
-  {
-    company: "Freelance",
-    role: "Web & Mobile Developer",
-    dates: "2021 — 2023",
-    points: [
-      "Delivered full-stack web and React Native apps for small teams and founders.",
-      "Took projects from spec to production, including deployment and maintenance.",
-    ],
-  },
-];
+const GITHUB_USERNAME = experience.githubUsername;
 
 // --- GitHub contributions (build-time fetch) ---
 type Day = { date: string; count: number; level: number };
@@ -84,17 +64,17 @@ function fillFor(count: number) {
       <span
         class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
       >
-        Experience
+        {experience.eyebrow}
       </span>
       <h2
         class="font-serif text-2xl leading-tight tracking-tight text-[var(--text-1)] mt-3"
       >
-        Where I've worked
+        {experience.heading}
       </h2>
 
       <div class="flex flex-col gap-10 mt-8">
         {
-          experience.map((job) => (
+          experience.jobs.map((job) => (
             <div class="border-l border-[var(--border)] pl-5">
               <h3 class="text-xl font-medium text-[var(--text-1)]">
                 {job.company}
@@ -119,7 +99,7 @@ function fillFor(count: number) {
     <!-- Right: GitHub contribution graph -->
     <div class="flex flex-col gap-4 min-w-0">
       <div class="flex items-baseline justify-between gap-4">
-        <span class="text-sm text-[var(--text-3)]">Contributions</span>
+        <span class="text-sm text-[var(--text-3)]">{experience.contributionsLabel}</span>
         {
           totalLastYear > 0 && (
             <span class="text-sm text-[var(--text-3)]">
@@ -163,7 +143,7 @@ function fillFor(count: number) {
           </div>
         ) : (
           <p class="text-sm text-[var(--text-muted)]">
-            Contribution data is unavailable right now.
+            {experience.contributionsUnavailable}
           </p>
         )
       }
