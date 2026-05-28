@@ -58,15 +58,15 @@ const rows = [
               {...(external
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              class="group flex items-center gap-4 py-4 border-b border-[var(--border-subtle)] transition-colors duration-200"
+              class="group grid grid-cols-[1.25rem_5rem_minmax(0,1fr)] items-center gap-4 py-4 border-b border-[var(--border-subtle)] transition-colors duration-200 sm:grid-cols-[1.25rem_8rem_minmax(0,1fr)]"
             >
               <span class="contact-icon text-[var(--text-3)]">
                 <Icon />
               </span>
-              <span class="text-sm text-[var(--text-3)] w-32 shrink-0">
+              <span class="text-sm text-[var(--text-3)]">
                 {label}
               </span>
-              <span class="inline-flex items-center gap-1.5 text-base text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+              <span class="inline-flex min-w-0 flex-wrap items-center gap-1.5 break-all text-base text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]">
                 {value}
                 {arrow && (
                   <span
