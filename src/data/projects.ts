@@ -1,7 +1,12 @@
+import dropFormCover from "../assets/project-screenshot/dropform.png";
+import devWork from "../assets/project-screenshot/devwork.png";
+import fundly from "../assets/project-screenshot/fundly.png";
+import forma from "../assets/project-screenshot/forma.png";
+
 export const projects = [
   {
-    slug: "trackflow-project-management-app",
-    title: "TrackFlow — Project Management App",
+    slug: "drop-form-AI-form-builder",
+    title: "DropForm — AI Form Builder",
     tagline:
       "A focused task and sprint management tool built for small dev teams.",
     summary:
@@ -18,18 +23,17 @@ export const projects = [
     ],
     category: "SaaS Platform",
     featured: true,
-    cover:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+    cover: dropFormCover,
     tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
     liveUrl: "https://trackflow.demo.dev",
     githubUrl: "https://github.com/thisMeSandeep/trackflow",
     bentoSize: "large",
   },
   {
-    slug: "fieldnote-mobile-app",
-    title: "FieldNote — Offline-First Notes",
+    slug: "devwork-freelance-marketplace",
+    title: "DevWork — Freelance Marketplace",
     tagline:
-      "A React Native notes app that syncs seamlessly the moment you're back online.",
+      "A platform for connecting freelancers with clients seeking skilled developers.",
     summary:
       "FieldNote focuses on frictionless capture: write quickly offline, keep working anywhere, and let sync happen in the background when connectivity returns.",
     challenge:
@@ -44,16 +48,15 @@ export const projects = [
     ],
     category: "Mobile App",
     featured: true,
-    cover:
-      "https://images.unsplash.com/photo-1517842645767-c639042777db?w=1200&q=80",
+    cover: devWork,
     tech: ["React Native", "TypeScript", "Firebase"],
     liveUrl: "https://fieldnote.demo.dev",
     githubUrl: "https://github.com/thisMeSandeep/fieldnote",
     bentoSize: "medium",
   },
   {
-    slug: "quill-headless-cms-api",
-    title: "Quill — Headless CMS API",
+    slug: "Fundly-a-personal-finance-management-app",
+    title: "Fundly — Personal Finance Management App",
     tagline:
       "A lightweight content API with role-based access and a clean REST surface.",
     summary:
@@ -70,18 +73,17 @@ export const projects = [
     ],
     category: "Backend / API",
     featured: true,
-    cover:
-      "https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&q=80",
+    cover: fundly,
     tech: ["Node.js", "Hono", "PostgreSQL", "Docker"],
     liveUrl: "https://quill.demo.dev",
     githubUrl: "https://github.com/thisMeSandeep/quill",
     bentoSize: "medium",
   },
   {
-    slug: "pulse-analytics-dashboard",
-    title: "Pulse — Analytics Dashboard",
+    slug: "Forma-svg-based-design-tool",
+    title: "Forma — SVG-Based Design Tool",
     tagline:
-      "Real-time product analytics with fast charts and a distraction-free UI.",
+      "A modern design tool for creating and editing SVG graphics with a focus on simplicity and performance.",
     summary:
       "Pulse is an analytics workspace for quickly understanding product performance without turning every page into a wall of charts.",
     challenge:
@@ -96,8 +98,7 @@ export const projects = [
     ],
     category: "SaaS Platform",
     featured: true,
-    cover:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
+    cover: forma,
     tech: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL"],
     liveUrl: "https://pulse.demo.dev",
     githubUrl: "https://github.com/thisMeSandeep/pulse",

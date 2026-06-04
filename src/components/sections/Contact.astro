@@ -1,8 +1,10 @@
 ---
+import { Image } from "astro:assets";
 import Phone from "../icons/Phone.astro";
 import Mail from "../icons/Mail.astro";
 import Message from "../icons/Message.astro";
-import { phone, email } from "../../data/info.ts";
+import { phone, email, dropFormLink } from "../../data/info.ts";
+import qrcode from "../../assets/qrcode.png";
 
 // info.ts stores the `tel:` / `mailto:` hrefs; strip the scheme for display.
 const phoneDisplay = phone.replace(/^tel:/, "");
@@ -25,7 +27,7 @@ const rows = [
     Icon: Message,
     label: "Project enquiry",
     value: "Start a project",
-    href: "https://dropform.io",
+    href: dropFormLink,
     arrow: true,
     external: true,
   },
@@ -82,6 +84,35 @@ const rows = [
         ))
       }
     </ul>
+
+    <div
+      class="mt-10 flex flex-col items-center gap-5 rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] p-6 sm:flex-row sm:items-center sm:gap-6"
+    >
+      <a
+        href={dropFormLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="shrink-0 rounded-[var(--border-radius)] border border-[var(--border-subtle)] bg-white p-2"
+      >
+        <Image
+          src={qrcode}
+          alt="QR code linking to the project enquiry form"
+          width={200}
+          height={200}
+          class="h-28 w-28"
+        />
+      </a>
+      <div class="text-center sm:text-left">
+        <p class="text-base text-[var(--text-1)]">
+          Prefer to scan? Point your camera at the code.
+        </p>
+        <p
+          class="mt-1.5 text-sm text-[var(--text-2)] max-w-[var(--max-w-content)]"
+        >
+          It opens a short form where you can message me directly.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
