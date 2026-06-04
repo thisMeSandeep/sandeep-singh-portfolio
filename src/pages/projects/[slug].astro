@@ -13,7 +13,7 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const absoluteCover = new URL(project.cover, Astro.site).href;
+const absoluteCover = new URL(project.cover.src, Astro.site).href;
 
 // Map a display tech name to its icon filename (without .svg).
 // Most names match the asset filename 1:1; these don't.
@@ -49,7 +49,7 @@ const projectSchema = {
 <Layout
   title={`${project.title} — Sandeep Singh`}
   description={project.tagline}
-  image={project.cover}
+  image={project.cover.src}
   imageWidth={1200}
   imageHeight={675}
   keywords={[project.title, project.category, ...project.tech]}
