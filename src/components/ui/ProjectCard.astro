@@ -12,30 +12,35 @@ interface Props {
   githubUrl?: string;
   slug: string;
   bentoSize: "large" | "medium" | "small";
+  layout?: "default" | "featured";
 }
 
-const { title, tagline, category, cover, tech, slug } = Astro.props;
+const {
+  title,
+  tagline,
+  category,
+  cover,
+  tech,
+  slug,
+  layout = "default",
+} = Astro.props;
+const isFeaturedLayout = layout === "featured";
 ---
 
 <article
-  class="project-card group flex h-full flex-col overflow-hidden rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow)]"
+  class:list={[
+    "project-card group flex h-full overflow-hidden rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg)] transition-[border-color,box-shadow] duration-200 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow)]",
+    isFeaturedLayout ? "flex-col lg:flex-row" : "flex-col",
+  ]}
 >
-  <!-- Image fills the remaining height of the cell -->
-  <a
-    href={`/projects/${slug}`}
-    class="relative block min-h-44 w-full grow overflow-hidden lg:min-h-0"
+  <div
+    class:list={[
+      "flex flex-col gap-2 p-5",
+      isFeaturedLayout
+        ? "order-2 shrink-0 lg:order-1 lg:w-[42%] lg:justify-center lg:p-8"
+        : "order-2 grow",
+    ]}
   >
-    <Image
-      src={cover}
-      alt={title}
-      width={1200}
-      height={800}
-      class="absolute inset-0 h-full w-full border-b border-[var(--border-subtle)] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-    />
-  </a>
-
-  <!-- Body: fixed, compact -->
-  <div class="flex shrink-0 flex-col gap-2 p-5">
     <span
       class="text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]"
     >
@@ -44,24 +49,54 @@ const { title, tagline, category, cover, tech, slug } = Astro.props;
 
     <a href={`/projects/${slug}`}>
       <h3
-        class="font-serif text-xl font-medium leading-snug text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]"
+        class:list={[
+          "font-serif font-medium leading-snug text-[var(--text-1)] transition-colors duration-200 group-hover:text-[var(--accent)]",
+          isFeaturedLayout ? "text-2xl" : "text-xl",
+        ]}
       >
         {title}
       </h3>
     </a>
 
-    <p class="line-clamp-2 text-sm text-[var(--text-2)] leading-[var(--leading-normal)]">
+    <p
+      class:list={[
+        "text-sm text-[var(--text-2)] leading-[var(--leading-normal)]",
+        isFeaturedLayout ? "line-clamp-3" : "line-clamp-2",
+      ]}
+    >
       {tagline}
     </p>
 
     <div class="mt-1 flex flex-wrap gap-2">
       {
-        tech.slice(0, 4).map((t) => (
-          <span class="rounded-[var(--border-radius-sm)] bg-[var(--tag-bg)] px-2 py-0.5 text-xs text-[var(--tag-text)]">
-            {t}
-          </span>
-        ))
+        tech
+          .slice(0, 4)
+          .map((t) => (
+            <span class="rounded-[var(--border-radius-sm)] bg-[var(--tag-bg)] px-2 py-0.5 text-xs text-[var(--tag-text)]">
+              {t}
+            </span>
+          ))
       }
     </div>
   </div>
+
+  <a
+    href={`/projects/${slug}`}
+    class:list={[
+      "block w-full p-4",
+      isFeaturedLayout
+        ? "order-1 lg:order-2 lg:flex lg:grow lg:items-center lg:pl-0"
+        : "order-1 shrink-0 pb-0",
+    ]}
+  >
+    <div
+      class="relative aspect-[16/10] w-full overflow-hidden rounded-[var(--border-radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-2)]"
+    >
+      <Image
+        src={cover}
+        alt={title}
+        class="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+      />
+    </div>
+  </a>
 </article>

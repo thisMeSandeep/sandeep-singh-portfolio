@@ -1,9 +1,35 @@
-import dropFormCover from "../assets/project-screenshot/dropform.png";
-import devWork from "../assets/project-screenshot/devwork.png";
-import fundly from "../assets/project-screenshot/fundly.png";
-import forma from "../assets/project-screenshot/forma.png";
+import dropFormCover from "../assets/project-screenshot/dropform.webp";
+import devWork from "../assets/project-screenshot/devwork.webp";
+import fundly from "../assets/project-screenshot/fundly.webp";
+import forma from "../assets/project-screenshot/forma.webp";
+import eventBid from "../assets/project-screenshot/eventbid.webp";
 
 export const projects = [
+  {
+    slug: "EventBid",
+    title: "EventBid — let venues bid for your event",
+    tagline:
+      "A platform that connects event host with venues, allowing them to receive competitive bids for hosting their events.",
+    summary:
+      "TrackFlow was designed to help small product teams move from scattered planning to a single source of truth for tasks, sprints, and delivery status.",
+    challenge:
+      "The main challenge was balancing a dense feature set with a calm interface that still felt fast under daily use.",
+    approach:
+      "I chose React and TypeScript for a predictable component model, Node.js for a simple API layer, and PostgreSQL to keep team, sprint, and task data relational and easy to query.",
+    outcome:
+      "The result is a product that makes planning work visible without adding process overhead, while leaving room to grow into burndown charts, filters, and team reporting.",
+    learnings: [
+      "Clear information hierarchy matters more than packing every control onto the screen.",
+      "Strong data modeling makes sprint workflows easier to evolve later.",
+    ],
+    category: "SaaS Platform",
+    featured: true,
+    cover: dropFormCover,
+    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
+    liveUrl: "https://trackflow.demo.dev",
+    githubUrl: "https://github.com/thisMeSandeep/trackflow",
+    bentoSize: "large",
+  },
   {
     slug: "drop-form-AI-form-builder",
     title: "DropForm — AI Form Builder",
@@ -72,7 +98,7 @@ export const projects = [
       "Keeping the deployment story simple improves adoption for small teams.",
     ],
     category: "Backend / API",
-    featured: true,
+    featured: false,
     cover: fundly,
     tech: ["Node.js", "Hono", "PostgreSQL", "Docker"],
     liveUrl: "https://quill.demo.dev",
