@@ -24,7 +24,7 @@ export const projects = [
     ],
     category: "SaaS Platform",
     featured: true,
-    cover: dropFormCover,
+    cover: eventBid,
     tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Tailwind CSS"],
     liveUrl: "https://trackflow.demo.dev",
     githubUrl: "https://github.com/thisMeSandeep/trackflow",
