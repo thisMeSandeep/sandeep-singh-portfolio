@@ -7,7 +7,7 @@ interface Props {
 const { name, icon } = Astro.props;
 
 // Resolve every tech icon to its built URL, keyed by bare filename.
-const modules = import.meta.glob<string>("../../assets/tech-icons/*.svg", {
+const modules = import.meta.glob<string>("../../assets/tech-icons/*.{svg,webp}", {
   eager: true,
   query: "?url",
   import: "default",
@@ -15,7 +15,7 @@ const modules = import.meta.glob<string>("../../assets/tech-icons/*.svg", {
 
 const icons: Record<string, string> = {};
 for (const [path, url] of Object.entries(modules)) {
-  const file = path.split("/").pop()!.replace(/\.svg$/, "");
+  const file = path.split("/").pop()!.replace(/\.(svg|webp)$/, "");
   icons[file] = url;
 }
 
