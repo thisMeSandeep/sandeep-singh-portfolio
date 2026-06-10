@@ -1,9 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import "../../styles/prose.css";
 import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Share from "../../components/icons/Share.astro";
-import CheckCircle from "../../components/icons/CheckCircle.astro";
+
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -88,6 +89,7 @@ const articleSchema = {
           </button>
         </div>
 
+        <!-- The article header, showing category, date, read time, title, excerpt, and tags. -->
         <header class="mt-8">
           <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs uppercase tracking-[var(--tracking-wider)] text-[var(--text-3)]">
             <span>{post.data.category}</span>
@@ -120,6 +122,7 @@ const articleSchema = {
           }
         </header>
 
+        <!-- The cover image, optimized by Astro's built-in Image component. -->
         <Image
           src={post.data.cover}
           alt={post.data.title}
@@ -127,7 +130,8 @@ const articleSchema = {
           height={675}
           class="mt-10 aspect-[16/9] w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] object-cover"
         />
-
+        
+        <!-- The actual blog content, rendered from Markdown by Astro's content collections. -->
         <div class="prose mt-10">
           <Content />
         </div>
@@ -169,164 +173,10 @@ const articleSchema = {
 </Layout>
 
 <style>
-  /* Markdown prose styling. Elements come from <Content />, so they aren't
-     scoped by Astro — target them with :global() under the .prose wrapper.
-     All colors use theme tokens, so light/dark switching is automatic. */
+  /* Prose/markdown styling lives in ../../styles/prose.css (imported above).
+     Only page-specific styles remain here. */
   .share-button :global(svg) {
     width: 16px;
     height: 16px;
-  }
-
-  .prose {
-    color: var(--text-2);
-    font-size: 1rem;
-    line-height: var(--leading-relaxed);
-  }
-
-  /* Headings */
-  .prose :global(h2) {
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    line-height: 1.25;
-    letter-spacing: var(--tracking-tight);
-    color: var(--text-1);
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-  }
-  .prose :global(h3) {
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.35;
-    color: var(--text-1);
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
-  }
-  .prose :global(h4) {
-    font-size: 1.05rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--text-1);
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .prose :global(:is(h2, h3, h4):first-child) {
-    margin-top: 0;
-  }
-
-  /* Paragraphs & inline emphasis */
-  .prose :global(p) {
-    margin: 1rem 0;
-  }
-  .prose :global(strong) {
-    color: var(--text-1);
-    font-weight: var(--font-weight-medium);
-  }
-
-  /* Links */
-  .prose :global(a) {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    transition: color var(--transition);
-  }
-  .prose :global(a:hover) {
-    color: var(--accent-hover);
-  }
-
-  /* Lists */
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
-  }
-  .prose :global(ul) {
-    list-style: disc;
-  }
-  .prose :global(ol) {
-    list-style: decimal;
-  }
-  .prose :global(li) {
-    margin: 0.375rem 0;
-  }
-  .prose :global(li::marker) {
-    color: var(--text-3);
-  }
-  .prose :global(li > ul),
-  .prose :global(li > ol) {
-    margin: 0.375rem 0;
-  }
-
-  /* Blockquotes */
-  .prose :global(blockquote) {
-    margin: 1.5rem 0;
-    padding: 0.25rem 0 0.25rem 1rem;
-    border-left: 3px solid var(--accent);
-    color: var(--text-1);
-    font-style: italic;
-  }
-  .prose :global(blockquote p) {
-    margin: 0.5rem 0;
-  }
-
-  /* Thin divider (---) */
-  .prose :global(hr) {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0;
-  }
-
-  /* Images */
-  .prose :global(img) {
-    display: block;
-    width: 100%;
-    margin: 1.5rem 0;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius-lg);
-  }
-
-  /* Tables */
-  .prose :global(table) {
-    width: 100%;
-    margin: 1.5rem 0;
-    border-collapse: collapse;
-    font-size: 0.9rem;
-  }
-  .prose :global(th),
-  .prose :global(td) {
-    padding: 0.5rem 0.75rem;
-    border: 1px solid var(--border);
-    text-align: left;
-  }
-  .prose :global(th) {
-    background: var(--bg-3);
-    color: var(--text-1);
-    font-weight: var(--font-weight-medium);
-  }
-
-  /* Inline code */
-  .prose :global(code) {
-    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-    font-size: 0.875em;
-    background: var(--bg-3);
-    color: var(--text-1);
-    padding: 0.125rem 0.375rem;
-    border-radius: var(--border-radius-sm);
-  }
-
-  /* Fenced code blocks (Shiki adds .astro-code + inline bg/token colors) */
-  .prose :global(pre) {
-    margin: 1.5rem 0;
-    padding: 1rem 1.25rem;
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--border-subtle);
-    overflow-x: auto;
-    font-size: 0.875rem;
-    line-height: 1.6;
-  }
-  .prose :global(pre code) {
-    background: transparent;
-    color: inherit;
-    padding: 0;
-    border-radius: 0;
-    font-size: inherit;
   }
 </style>

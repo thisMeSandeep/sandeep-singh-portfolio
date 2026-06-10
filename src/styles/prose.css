@@ -1,0 +1,158 @@
+/* Reusable markdown prose styling.
+   Import this in any blog/article page and wrap rendered <Content /> in
+   <div class="prose">. Elements come from markdown, so they aren't scoped
+   by Astro — this is a plain global stylesheet (no :global() needed).
+   All colors use theme tokens, so light/dark switching is automatic. */
+
+.prose {
+  color: var(--text-2);
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+}
+
+/* Headings */
+.prose h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-1);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.prose h3 {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.35;
+  color: var(--text-1);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.prose h4 {
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--text-1);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.prose :is(h2, h3, h4):first-child {
+  margin-top: 0;
+}
+
+/* Paragraphs & inline emphasis */
+.prose p {
+  margin: 1rem 0;
+}
+.prose strong {
+  color: var(--text-1);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Links */
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition);
+}
+.prose a:hover {
+  color: var(--accent-hover);
+}
+
+/* Lists */
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+.prose ul {
+  list-style: disc;
+}
+.prose ol {
+  list-style: decimal;
+}
+.prose li {
+  margin: 0.375rem 0;
+}
+.prose li::marker {
+  color: var(--text-3);
+}
+.prose li > ul,
+.prose li > ol {
+  margin: 0.375rem 0;
+}
+
+/* Blockquotes */
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding: 0.25rem 0 0.25rem 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--text-1);
+  font-style: italic;
+}
+.prose blockquote p {
+  margin: 0.5rem 0;
+}
+
+/* Thin divider (---) */
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+/* Images */
+.prose img {
+  display: block;
+  width: 100%;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--border-radius-lg);
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.prose th,
+.prose td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.prose th {
+  background: var(--bg-3);
+  color: var(--text-1);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Inline code */
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875em;
+  background: var(--bg-3);
+  color: var(--text-1);
+  padding: 0.125rem 0.375rem;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Fenced code blocks (Shiki adds .astro-code + inline bg/token colors) */
+.prose pre {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.prose pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
