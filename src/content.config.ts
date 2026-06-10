@@ -4,17 +4,18 @@ import { z } from "astro/zod";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
-  schema: z.object({
-    title: z.string(),
-    excerpt: z.string(),
-    publishedDate: z.coerce.date(),
-    readTime: z.number(),
-    category: z.string(),
-    tags: z.array(z.string()).default([]),
-    cover: z.url(),
-    featured: z.boolean().default(false),
-    draft: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      excerpt: z.string(),
+      publishedDate: z.coerce.date(),
+      readTime: z.number(),
+      category: z.string(),
+      tags: z.array(z.string()).default([]),
+      cover: image(),
+      featured: z.boolean().default(false),
+      draft: z.boolean().default(false),
+    }),
 });
 
 // Long-form case study for each project. The markdown file name (its `id`)

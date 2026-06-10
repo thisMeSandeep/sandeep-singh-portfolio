@@ -11,3 +11,5 @@ export const phone = "tel:+919305787991";
 export const location = "Hyderabad, India";
 
 export const dropFormLink = "https://drop-form.vercel.app/f/cmpz4gqyv000004lgyv42icg0";
+
+export const livePortfolioLink="https://www.sandeepnayal.com"

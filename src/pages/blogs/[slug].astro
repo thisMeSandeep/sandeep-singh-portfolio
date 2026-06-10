@@ -21,7 +21,8 @@ const formattedDate = post.data.publishedDate.toLocaleDateString("en-US", {
 });
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const absoluteCover = new URL(post.data.cover, Astro.site).href;
+// `cover` is an imported, optimized local image (ImageMetadata).
+const absoluteCover = new URL(post.data.cover.src, Astro.site).href;
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -50,7 +51,7 @@ const articleSchema = {
 <Layout
   title={`${post.data.title} — Sandeep Singh`}
   description={post.data.excerpt}
-  image={post.data.cover}
+  image={post.data.cover.src}
   imageWidth={1200}
   imageHeight={675}
   type="article"
@@ -64,7 +65,7 @@ const articleSchema = {
     set:html={JSON.stringify(articleSchema)}
   />
   <article class="border-b border-[var(--border)]">
-      <div class="mx-auto max-w-[var(--max-w-prose,42rem)] px-6 md:px-8 py-24">
+      <div class="mx-auto max-w-[var(--max-w-prose,48rem)] px-6 md:px-8 py-24">
         <div class="flex items-center justify-between gap-4">
           <a
             href="/blogs"
@@ -126,9 +127,7 @@ const articleSchema = {
         <Image
           src={post.data.cover}
           alt={post.data.title}
-          width={1200}
-          height={675}
-          class="mt-10 aspect-[16/9] w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)] object-cover"
+          class="mt-10 h-auto w-full rounded-[var(--border-radius-lg)] border border-[var(--border-subtle)]"
         />
         
         <!-- The actual blog content, rendered from Markdown by Astro's content collections. -->
