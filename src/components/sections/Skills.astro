@@ -1,12 +1,15 @@
 ---
 import TechIcon from "../ui/TechIcon.astro";
 
-const groups = [
+const groups: {
+  label: string;
+  items: { name: string; icon: string; invert?: "dark" | "light" }[];
+}[] = [
   {
     label: "Frontend",
     items: [
       { name: "React", icon: "React" },
-      { name: "Next.js", icon: "Next.js" },
+      { name: "Next.js", icon: "Next.js", invert: "dark" },
       { name: "TanStack Start", icon: "tanstack" },
       { name: "Astro", icon: "Astro" },
       { name: "TypeScript", icon: "TypeScript" },
@@ -14,8 +17,8 @@ const groups = [
       { name: "Redux", icon: "Redux" },
       { name: "Zustand", icon: "zustand" },
       { name: "Tailwind CSS", icon: "Tailwind CSS" },
-      { name: "shadcn/ui", icon: "shadcn-ui" },
-      { name: "Framer Motion", icon: "framer-dark" },
+      { name: "shadcn/ui", icon: "shadcn-ui", invert: "light" },
+      { name: "Framer Motion", icon: "framer-dark", invert: "light" },
       { name: "HTML5", icon: "HTML5" },
       { name: "CSS3", icon: "CSS3" },
     ],
@@ -25,16 +28,17 @@ const groups = [
     items: [
       { name: "Node.js", icon: "Node.js" },
       { name: "Python", icon: "Python" },
-      { name: "Express", icon: "Express" },
+      { name: "Express", icon: "Express", invert: "dark" },
       { name: "Hono", icon: "Hono" },
       { name: "FastAPI", icon: "FastAPI" },
       { name: "Better Auth", icon: "better-auth" },
+      { name: "AI SDK", icon: "ai-sdk", invert: "dark" },
       { name: "LangChain", icon: "langchain-color" },
       { name: "PostgreSQL", icon: "PostgresSQL" },
       { name: "MongoDB", icon: "MongoDB" },
       { name: "Redis", icon: "redis" },
       { name: "Mongoose", icon: "Mongoose.js" },
-      { name: "Prisma", icon: "prisma" },
+      { name: "Prisma", icon: "prisma", invert: "light" },
       { name: "Drizzle ORM", icon: "drizzle-orm" },
     ],
   },
@@ -45,7 +49,7 @@ const groups = [
       { name: "Expo", icon: "expo" },
       { name: "Firebase", icon: "Firebase" },
       { name: "Appwrite", icon: "Appwrite" },
-      { name: "Socket.io", icon: "Socket.io" },
+      { name: "Socket.io", icon: "Socket.io", invert: "dark" },
     ],
   },
   {
@@ -86,7 +90,7 @@ const groups = [
             </span>
             <div class="flex flex-wrap gap-x-8 gap-y-6">
               {group.items.map((item) => (
-                <TechIcon name={item.name} icon={item.icon} />
+                <TechIcon name={item.name} icon={item.icon} invert={item.invert} />
               ))}
             </div>
           </div>

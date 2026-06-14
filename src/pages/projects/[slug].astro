@@ -30,6 +30,9 @@ const absoluteCover = new URL(project.cover.src, Astro.site).href;
 const iconOverrides: Record<string, string> = {
   PostgreSQL: "PostgresSQL",
   "React Native": "React",
+  "AI-SDK": "ai-sdk",
+  "Tanstack Start": "tanstack",
+  Redis: "redis",
 };
 const iconFor = (tech: string) => iconOverrides[tech] ?? tech;
 

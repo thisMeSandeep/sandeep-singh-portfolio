@@ -4,20 +4,20 @@ excerpt: 'What `"use client"` actually does, why some components can touch your 
 publishedDate: 2026-06-10
 readTime: 10
 category: "Frontend"
-tags: ["React", "Next.js", "Server Components", "Hydration"]
+tags: ["React", "Next.js", "Client Component" , "Server Components", "Hydration"]
 cover: ../../assets/blog/components/components.webp
 featured: true
 ---
 
 > Understand these three and the whole `"use client"` confusion disappears for good.
 
-You must have written `"use client"` at the top of a file because Next.js threw an error at you, or because you wanted to use `useState`. It worked, the error went away, you moved on. But do you actually know what that one line _did_? Why some components can fetch from a database directly and others can't? Why your `onClick` "doesn't work" until a split second after the page loads? Why you sometimes get that scary red **"Hydration failed"** error?
+You must have written `"use client"` at the top of a file because Next.js threw an error at you, or because you wanted to use `useState`. It worked, the error went away and you moved on. But do you actually know what that one line _did_? Why some components can fetch from a database directly and others can't? Why your `onClick` "doesn't work" until a split second after the page loads? Why you sometimes get that irritating red **"Hydration failed"** error?
 
-All of it comes down to three ideas: **Server Components**, **Client Components**, and the bridge between them — **Hydration**. Understand these and you'll stop guessing where `"use client"` goes and start knowing.
+All of it comes down to three things : **Server Components**, **Client Components**, and the bridge between them — **Hydration**. Understand these and you'll stop guessing where `"use client"` goes and start knowing.
 
 ## Why does this even matter?
 
-You can ship apps without understanding this. But you'll keep paying for it:
+You can build application without understanding this. But you'll keep paying for it:
 
 - You'll mark whole pages `"use client"` "to be safe", and ship a pile of unnecessary JavaScript to the browser — slower loads for no reason.
 - You'll accidentally leak a secret API key into the browser bundle, because you didn't know which code runs where.
@@ -275,4 +275,4 @@ Step back and it's all one idea — _where does this code run?_
 - **Client Components** (`"use client"`) run on the server _first_ and then in the browser. They give you state, events and browser APIs — at the cost of shipping JS.
 - **Hydration** is the bridge: the server sends static HTML, then React "plugs it in" in the browser to make it interactive. The server and client must render the same thing, or you get a hydration error.
 
-So the next time you reach for `"use client"`, you won't be cargo-culting it to silence an error. You'll know that you're drawing a boundary, shipping some JavaScript, and signing up for hydration — and you'll put it exactly where it belongs: on the smallest interactive leaf, and nowhere else.
+So the next time you reach for `"use client"`, you won't be work around to silence an error. You'll know that you're drawing a boundary, shipping some JavaScript, and signing up for hydration — and you'll put it exactly where it belongs: on the smallest interactive commponent, and nowhere else.

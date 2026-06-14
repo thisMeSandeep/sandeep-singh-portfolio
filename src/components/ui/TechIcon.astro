@@ -2,9 +2,13 @@
 interface Props {
   name: string; // display name, e.g. "React"
   icon: string; // filename without .svg, e.g. "React" or "Tailwind CSS"
+  // For monochrome logos that blend into the background. "dark" = the asset is
+  // black and needs inverting in dark mode; "light" = the asset is white and
+  // needs inverting in light mode.
+  invert?: "dark" | "light";
 }
 
-const { name, icon } = Astro.props;
+const { name, icon, invert } = Astro.props;
 
 // Resolve every tech icon to its built URL, keyed by bare filename.
 const modules = import.meta.glob<string>("../../assets/tech-icons/*.{svg,webp}", {
@@ -23,7 +27,7 @@ const src = icons[icon];
 ---
 
 {
-  src && (
+  src ? (
     <div class="tech-icon group flex flex-col items-center gap-1.5">
       <img
         src={src}
@@ -31,11 +35,30 @@ const src = icons[icon];
         width="32"
         height="32"
         loading="lazy"
+        data-invert={invert}
         class="h-8 w-8 opacity-100 transition-opacity duration-200 md:opacity-70 md:group-hover:opacity-100"
       />
       <span class="text-xs text-[var(--text-1)] transition-colors duration-200 md:text-[var(--text-3)] md:group-hover:text-[var(--text-1)]">
         {name}
       </span>
     </div>
+  ) : (
+    <span class="inline-flex items-center rounded-full border border-[var(--border-strong)] px-3 py-1 text-xs text-[var(--text-2)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--text-1)]">
+      {name}
+    </span>
   )
 }
+
+<style>
+  /* White-on-transparent logos: flip to dark in light mode, leave white in dark mode. */
+  img[data-invert="light"] {
+    filter: invert(1);
+  }
+  :global(.dark) img[data-invert="light"] {
+    filter: none;
+  }
+  /* Black-on-transparent logos: flip to white in dark mode. */
+  :global(.dark) img[data-invert="dark"] {
+    filter: invert(1);
+  }
+</style>
