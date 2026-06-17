@@ -213,4 +213,19 @@ const projectSchema = {
       </nav>
     </div>
   </article>
+
+  <!-- Render any ```mermaid blocks emitted by the project story as diagrams. -->
+  <script>
+    import mermaid from "mermaid";
+
+    const blocks = document.querySelectorAll<HTMLElement>("pre.mermaid");
+    if (blocks.length) {
+      const isDark = document.documentElement.classList.contains("dark");
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isDark ? "dark" : "default",
+      });
+      mermaid.run({ nodes: blocks });
+    }
+  </script>
 </Layout>

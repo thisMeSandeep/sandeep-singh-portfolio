@@ -1,33 +1,35 @@
 # Sandeep Singh — Full-Stack Developer
 
-> Sandeep Singh is a full-stack developer based in Hyderabad, India, building web and
-> mobile products with React, TypeScript, Node.js, React Native, and Astro. This site
-> is his portfolio: selected projects and engineering writing.
+> Sandeep Singh is a full-stack developer based in Hyderabad, India, building web
+> products and AI-powered tools with React, TypeScript, Next.js, Node.js, and the
+> AI SDK. This site is his portfolio: selected projects and engineering writing.
 
 ## About
 
 - Name: Sandeep Singh
 - Role: Full-Stack Developer
 - Location: Hyderabad, India
-- Core stack: React, TypeScript, Node.js, React Native, PostgreSQL, Astro, Tailwind CSS
+- Core stack: React, TypeScript, Next.js, Node.js, Hono, PostgreSQL, AI SDK, Tailwind CSS
 - Site: https://sandeepnayal.com
 
 ## Writing
 
-- [Designing REST APIs That Age Well](https://sandeepnayal.com/blogs/designing-rest-apis-that-age-well/): Versioning, pagination, and the small naming decisions that decide whether an API is a joy or a chore.
-- [Offline-First Sync in React Native](https://sandeepnayal.com/blogs/offline-first-react-native-sync/): Designing a sync queue that survives flaky connections, app restarts, and impatient users.
-- [Building Optimistic UI in React Without a Library](https://sandeepnayal.com/blogs/building-optimistic-ui-react/): Making task updates feel instant, and handling the case when the server disagrees.
+- [Rendering Strategies](https://sandeepnayal.com/blogs/rendering-strategies): A practical, hands-on tour of SSG, ISR, SSR, CSR and PPR — what each one does, when to use it, and how to see it working in Next.js.
+- [Server Components, Client Components and Hydration](https://sandeepnayal.com/blogs/server-and-client-component): What `"use client"` actually does, why some components can touch your database and others can't, and how hydration turns static HTML into a live app.
 
 ## Projects
 
-- [TrackFlow — Project Management App](https://sandeepnayal.com/projects/trackflow-project-management-app/): A task and sprint management tool for small dev teams. React, TypeScript, Node.js, PostgreSQL.
-- [FieldNote — Offline-First Notes](https://sandeepnayal.com/projects/fieldnote-mobile-app/): A React Native notes app that syncs the moment you're back online. React Native, TypeScript, Firebase.
-- [Quill — Headless CMS API](https://sandeepnayal.com/projects/quill-headless-cms-api/): A lightweight content API with role-based access and a clean REST surface. Node.js, Hono, PostgreSQL, Docker.
-- [Pulse — Analytics Dashboard](https://sandeepnayal.com/projects/pulse-analytics-dashboard/): Real-time product analytics with fast charts and a distraction-free UI. Next.js, FastAPI, PostgreSQL.
+- [Sqliqs — Query your database in plain English](https://sandeepnayal.com/projects/Sqliqs-query-your-database-in-plain-English): A local-first AI agent that queries your database in plain English, then generates reports and visualizations. React, TypeScript, Next.js, AI SDK, PostgreSQL.
+- [EventBid — Let venues bid for your event](https://sandeepnayal.com/projects/EventBid-let-venues-bid-for-your-event): A platform that connects event hosts with venues so they receive competitive bids for hosting their events. React, Hono, TanStack Start, AI SDK, PostgreSQL, BullMQ, Redis.
+- [DropForm — AI-powered form builder](https://sandeepnayal.com/projects/drop-form-AI-form-builder): Describe a form in plain English and ship a styled, validated, published form in minutes. Next.js, TypeScript, Better Auth, AI SDK, PostgreSQL.
+- [DevWork — Freelance Marketplace](https://sandeepnayal.com/projects/devwork-freelance-marketplace): A mobile-first marketplace connecting freelancers with clients looking for skilled developers. Next.js, TypeScript, PostgreSQL, AI SDK, Auth.js.
+- [Forma — SVG-based design tool](https://sandeepnayal.com/projects/Forma-svg-based-design-tool): A browser-based design tool where the document is just SVG — what you draw is exactly what you export and inspect. React, Tailwind CSS.
+- [Fundly — Personal Finance Management App](https://sandeepnayal.com/projects/Fundly-a-personal-finance-management-app): A personal finance app that answers one question well — where did the money actually go this month? Node.js, Express, MongoDB, React.
 
 ## Links
 
 - All projects: https://sandeepnayal.com/projects/
 - All writing: https://sandeepnayal.com/blogs/
-- GitHub: https://github.com/sandeepsinghnayal
-- LinkedIn: https://www.linkedin.com/in/sandeepsinghnayal/
+- GitHub: https://github.com/thisMeSandeep
+- LinkedIn: https://www.linkedin.com/in/sandeepsinghnayal
+- X: https://x.com/DevSandeepSingh

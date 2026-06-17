@@ -101,7 +101,7 @@ export const projects = [
     bentoSize: "large",
   },
   {
-    slug: "Fundly-a personal finance managementapp",
+    slug: "Fundly-a-personal-finance-management-app",
     title: "Fundly — Personal Finance Management App",
     tagline:
       "A personal finance management app that helps users track their expenses, set budgets, and achieve their financial goals.",
